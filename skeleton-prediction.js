@@ -8,3 +8,9 @@ const outputStride = 16;
 const flipHorizontal = false; 
 
 const catImage = document.getElementById('cat'); 
+
+posenet.load().then(net => { 
+  return net.estimateSinglePose(catImage, imageScaleFactor, flipHorizontal, outputStride)
+}).then(pose => { 
+  console.log('pose', pose); 
+})
