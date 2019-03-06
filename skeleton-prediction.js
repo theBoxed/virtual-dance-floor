@@ -7,10 +7,10 @@ const imageScaleFactor = 0.5;
 const outputStride = 16; 
 const flipHorizontal = false; 
 
-const catImage = document.getElementById('cat'); 
+const webcam = document.getElementById('webcam');
 
-posenet.load().then(net => { 
-  return net.estimateSinglePose(catImage, imageScaleFactor, flipHorizontal, outputStride)
-}).then(pose => { 
-  console.log('pose', pose); 
-})
+// posenet.load().then(net => { 
+//   return net.estimateSinglePose(catImage, imageScaleFactor, flipHorizontal, outputStride)
+// }).then(pose => { 
+//   console.log('pose', pose); 
+// })
