@@ -6,3 +6,5 @@ const imageScaleFactor = 0.5;
 //The higher the value the smaller the resolution of the layers the model outputs. 
 const outputStride = 16; 
 const flipHorizontal = false; 
+
+const catImage = document.getElementById('cat'); 
