@@ -9,7 +9,6 @@ const flipHorizontal = false;
 
 const webcam = document.getElementById('webcam');
 
-
 const loadWebcam = () => { 
   return new Promise((resolve, reject) => { 
     navigator.mediaDevices.getUserMedia({video : true})
@@ -21,13 +20,22 @@ const loadWebcam = () => {
   })
 }
 
-if(navigator.mediaDevices.getUserMedia) { 
+const load = () => { 
   loadWebcam()
-    .then(() => console.log('loaded cam') );  
+    .then(() => { 
+      console.log('webcam loaded'); 
+      posenet.load().then(net => { 
+        
+        return net.estimateSinglePose(webcam, imageScaleFactor, flipHorizontal, outputStride)
+      }).then(pose => { 
+        console.log('pose', pose); 
+      }).catch(error => { 
+        console.error('error in retreving posenet: ', error)
+      })
+  });  
 }
 
-// posenet.load().then(net => { 
-//   return net.estimateSinglePose(catImage, imageScaleFactor, flipHorizontal, outputStride)
-// }).then(pose => { 
-//   console.log('pose', pose); 
-// })
+if(navigator.mediaDevices.getUserMedia) { 
+  load(); 
+}
+
