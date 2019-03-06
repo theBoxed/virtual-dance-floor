@@ -9,6 +9,11 @@ const flipHorizontal = false;
 
 const webcam = document.getElementById('webcam');
 
+if(navigator.mediaDevices.getUserMedia) { 
+  navigator.mediaDevices.getUserMedia({video : true})
+    .then(stream => webcam.srcObject = stream); 
+}
+
 // posenet.load().then(net => { 
 //   return net.estimateSinglePose(catImage, imageScaleFactor, flipHorizontal, outputStride)
 // }).then(pose => { 
