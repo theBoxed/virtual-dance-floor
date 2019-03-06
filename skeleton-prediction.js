@@ -9,16 +9,21 @@ const flipHorizontal = false;
 
 const webcam = document.getElementById('webcam');
 
+
 const loadWebcam = () => { 
   return new Promise((resolve, reject) => { 
     navigator.mediaDevices.getUserMedia({video : true})
-      .then(stream => resolve(stream))
+      .then(stream => { 
+        webcam.srcObject = stream; 
+        resolve(stream)
+      })
       .catch(error => reject(error)); 
   })
 }
 
 if(navigator.mediaDevices.getUserMedia) { 
-  loadWebcam().then(stream => webcam.srcObject = stream);  
+  loadWebcam()
+    .then(() => console.log('loaded cam') );  
 }
 
 // posenet.load().then(net => { 
