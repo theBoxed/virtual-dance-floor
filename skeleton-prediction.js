@@ -7,10 +7,37 @@ const imageScaleFactor = 0.5;
 const outputStride = 16; 
 const flipHorizontal = false; 
 
-const catImage = document.getElementById('cat'); 
+const webcam = document.getElementById('webcam');
+//referene to loaded posenet
+let net; 
 
-posenet.load().then(net => { 
-  return net.estimateSinglePose(catImage, imageScaleFactor, flipHorizontal, outputStride)
-}).then(pose => { 
-  console.log('pose', pose); 
-})
+const loadWebcam = () => { 
+  return navigator.mediaDevices.getUserMedia({video : true})
+}
+
+const loadPoseNet = () => { 
+  return posenet.load(); 
+}
+
+const load = () => { 
+  return new Promise((resolve, reject) => { 
+    loadWebcam()
+      .then((stream) => webcam.srcObject = stream)
+      .then(() => loadPoseNet())
+      .then(net => resolve(net))
+      .catch(error => reject(error));  
+  })
+}
+
+const predictPose = () => { 
+  net.estimateSinglePose(webcam, imageScaleFactor, flipHorizontal, outputStride)
+    .then((poseEstimate => console.log('poseEstimate', poseEstimate))); 
+}
+
+if(navigator.mediaDevices.getUserMedia) { 
+  load().then(loadedPosenet => { 
+    net = loadedPosenet; 
+    setInterval(predictPose, 1000); 
+  }); 
+}
+
