@@ -9,19 +9,11 @@ const flipHorizontal = false;
 
 const webcam = document.getElementById('webcam');
 
-const loadWebcam = () => { 
-  return navigator.mediaDevices.getUserMedia({video : true})
-}
-
-const loadPoseNet = () => { 
-  return posenet.load(); 
-}
-
 const load = () => { 
   return new Promise((resolve, reject) => { 
-    loadWebcam()
+    navigator.mediaDevices.getUserMedia({video : true})
       .then((stream) => webcam.srcObject = stream)
-      .then(() => loadPoseNet())
+      .then(() => posenet.load())
       .then(net => resolve(net))
       .catch(error => reject(error));  
   })
