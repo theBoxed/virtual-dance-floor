@@ -31,6 +31,10 @@ const predictPose = (net) => {
 if(navigator.mediaDevices.getUserMedia) { 
   load()
     .then(loadedPosenet => { 
+      const loadingText = document.getElementById('loading-text'); 
+      loadingText.classList.add('hidden'); 
+      webcam.classList.remove('hidden'); 
+      webcam.classList.add('visible'); 
       predictPose(loadedPosenet); 
   }); 
 }
