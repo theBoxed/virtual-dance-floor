@@ -1,4 +1,4 @@
-(() => {   
+const predictSekeleton = (() => {   
   //The imageScaleFactor determines by how much the image is scaled down. 
   //The lower the value the more scaled down the image is.
   //Making the prediction faster but at a cost of accuracy. 
@@ -10,7 +10,7 @@
 
   const webcam = document.getElementById('webcam');
 
-  const load = () => { 
+  function load () { 
     return new Promise((resolve, reject) => { 
       navigator.mediaDevices.getUserMedia({video : true})
         .then((stream) => webcam.srcObject = stream)
@@ -20,7 +20,7 @@
     })
   }
 
-  const predictPose = (net) => { 
+  function predictPose (net) { 
     net.estimateSinglePose(webcam, imageScaleFactor, flipHorizontal, outputStride)
       .then((poseEstimate => { 
         console.log('poseEstimate', poseEstimate); 
@@ -29,18 +29,24 @@
       })); 
   }
 
-  const showCamera = () => { 
+  function showCamera () { 
     const loadingText = document.getElementById('loading-text'); 
     loadingText.classList.add('hidden'); 
     webcam.classList.remove('hidden'); 
     webcam.classList.add('visible'); 
   }
 
-  if(navigator.mediaDevices.getUserMedia) { 
-    load()
-      .then(loadedPosenet => { 
-        showCamera(); 
-        predictPose(loadedPosenet); 
-    }); 
+  function onPageLoad () {
+    if(navigator.mediaDevices.getUserMedia) { 
+      load()
+        .then(loadedPosenet => { 
+          showCamera(); 
+          predictPose(loadedPosenet); 
+      }); 
+    }
   }
+
+  return { 
+    onPageLoad
+  }; 
 })(); 
