@@ -1,16 +1,6 @@
 const predictSekeleton = (() => {   
-  //The imageScaleFactor determines by how much the image is scaled down. 
-  //The lower the value the more scaled down the image is.
-  //Making the prediction faster but at a cost of accuracy. 
-  const imageScaleFactor = 0.5; 
-  //The outputStrude determines how by how much the output gets scaled down relative to the input image size. 
-  //The higher the value the smaller the resolution of the layers the model outputs. 
-  const outputStride = 16; 
-  const flipHorizontal = false; 
-
-  const webcam = document.getElementById('webcam');
-
-  function load () { 
+  
+  function load (webcam) { 
     return new Promise((resolve, reject) => { 
       navigator.mediaDevices.getUserMedia({video : true})
         .then((stream) => webcam.srcObject = stream)
@@ -20,28 +10,27 @@ const predictSekeleton = (() => {
     })
   }
 
-  function predictPose (net) { 
-    net.estimateSinglePose(webcam, imageScaleFactor, flipHorizontal, outputStride)
+  function predictPose (net, settings) { 
+    net.estimateSinglePose(settings.webcam, settings.imageScaleFactor, settings.flipHorizontal, settings.outputStride)
       .then((poseEstimate => { 
         console.log('poseEstimate', poseEstimate); 
-        //calls posenet once first frame is predicted
-        predictPose(net); 
+        predictPose(net, settings); 
       })); 
   }
 
-  function showCamera () { 
+  function showCamera (webcam) { 
     const loadingText = document.getElementById('loading-text'); 
     loadingText.classList.add('hidden'); 
     webcam.classList.remove('hidden'); 
     webcam.classList.add('visible'); 
   }
 
-  function onPageLoad () {
+  function onPageLoad (settings) {
     if(navigator.mediaDevices.getUserMedia) { 
-      load()
+      load(settings.webcam)
         .then(loadedPosenet => { 
-          showCamera(); 
-          predictPose(loadedPosenet); 
+          showCamera(settings.webcam);
+          predictPose(loadedPosenet, settings); 
       }); 
     }
   }
