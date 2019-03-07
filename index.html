@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Virtual Dance Floor</title>
+  <link rel="stylesheet" href="styles/app.css">
   <!-- Load TensorFlow.js -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
   <!-- Load Posenet -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
 </head>
 <body>
-  <video autoplay="true" width=500 height=500 id="webcam"></video>
+  <video autoplay="true" width=500 height=500 id="webcam">
+  </video>
   <script src="skeleton-prediction.js"></script>
 </body>
 </html>
