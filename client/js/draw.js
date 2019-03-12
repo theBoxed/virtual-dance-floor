@@ -15,6 +15,7 @@ const draw = (() => {
   }
 
   function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
+    
     ctx.beginPath();
     ctx.moveTo(ax * scale, ay * scale);
     ctx.lineTo(bx * scale, by * scale);
@@ -26,7 +27,7 @@ const draw = (() => {
   function drawSkeleton(keypoints, minPartConfidence, ctx, scale = 1) {
     const adjacentKeyPoints =
       posenet.getAdjacentKeyPoints(keypoints, minPartConfidence);
-
+console.log(adjacentKeyPoints);
     adjacentKeyPoints.forEach((keypoints) => {
       drawSegment(
         toTuple(keypoints[0].position), toTuple(keypoints[1].position), color,
@@ -44,7 +45,6 @@ const draw = (() => {
       drawPoint(ctx, y * scale, x * scale, 3, color);
     }
   }
-
 
   return {
     drawKeypoints,
