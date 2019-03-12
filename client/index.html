@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,15 @@
   <!-- Load Posenet -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
 </head>
+
 <body>
   <p id='loading-text'>Loading...</p>
-  <video autoplay="true" width=500 height=500 id="webcam" class="hidden">
+  <video autoplay="true" width=800 height=600 id="webcam" class="hidden">
   </video>
-
-  <script src="scripts/index.js"></script>
-      <script src="js/three.js"></script>
-          <script src="js/WebGL.js"></script>
-  <script src="js/GLTFLoader.js"></script>
-        <script src="js/scene.js"></script>
+  <canvas id="output"></canvas>
+  <script src="js/draw.js"></script>
+  <script src="js/skeleton-prediction.js"></script>
+  <script src="js/index.js"></script>
 </body>
+
 </html>
