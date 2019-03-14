@@ -41,7 +41,7 @@ function loopThroughUsers(users) {
     console.log('users', users[prop].joints);
 
     if (prop !== `userId:${userId}`) {
-      Draw.drawPose(users[prop].joints, { color: local.data.color });
+      Draw.drawPose(users[prop].joints, { color: dancer.data.color });
     }
   }
 }
