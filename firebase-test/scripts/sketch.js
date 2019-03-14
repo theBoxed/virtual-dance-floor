@@ -20,7 +20,7 @@ function draw() {
 
   segment(x, y, angle1);
   ellipse(x, y, 20, 20);
-  writeUserData(x, y, userId)
+  writeUserData(x, y, angle1, userId)
 }
 
 function segment(x, y, a) {

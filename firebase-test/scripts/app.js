@@ -12,10 +12,11 @@ let userId = Math.floor(Math.random() * 40000);
 let VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
 let users = VIRTUAL_DANCE_FLOOR.child('users').push().key; 
 
-function writeUserData(x, y, userId) {
+function writeUserData(x, y, angle1, userId) {
   firebase.database().ref(`users/userId:${userId}`).set({
-    x: x,
-    y: y,
+    x,
+    y,
+    angle1
   });
 }
 
@@ -25,7 +26,6 @@ usersRef.on('value', function(snapshot) {
 });
 
 function loopThroughUsers(users){ 
-  console.log('users', users); 
   for (prop in users){ 
     console.log('prop', prop); 
   }
