@@ -13,7 +13,7 @@ let VIRTUAL_DANCE_FLOOR = firebase.database().ref();
 let users = VIRTUAL_DANCE_FLOOR.child('users').push().key; 
 
 function writeUserData(x, y, angle1, userId) {
-  firebase.database().ref(`users/userId:${userId}`).set({x, y, angle});
+  firebase.database().ref(`users/userId:${userId}`).set({x, y, angle1});
 }
 
 var usersRef = firebase.database().ref('users/');
