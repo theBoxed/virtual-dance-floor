@@ -78,15 +78,7 @@ const Draw = new function() {
   }
 
   this.getPose = function () {
-    console.log('howdy');
     return this.pose0;
-  }
-
-  this.draw = function () {
-    console.log('hello');
-    if (this.pose0 != null) {
-      this.drawPose(this.getPose());
-    }
   }
 
   this.estimateSize = function (pose) {

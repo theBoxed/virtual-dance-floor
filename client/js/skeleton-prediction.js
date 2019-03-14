@@ -1,4 +1,6 @@
   let local;
+
+  //Sets up the canvas and initializes the video.
   function setup() {
     createCanvas(800, 600);
     background(0);
