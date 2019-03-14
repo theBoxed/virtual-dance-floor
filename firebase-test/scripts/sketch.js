@@ -3,6 +3,8 @@ let x = 100,
   angle1 = 0.0,
   segLength = 50;
 
+let userId = Math.floor(Math.random() * 4); 
+
 function setup() {
   createCanvas(710, 400);
   strokeWeight(20.0);
@@ -23,6 +25,7 @@ function draw() {
 
   segment(x, y, angle1);
   ellipse(x, y, 20, 20);
+  writeUserData(x, y, userId)
 }
 
 function segment(x, y, a) {
