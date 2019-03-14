@@ -11,9 +11,11 @@ firebase.initializeApp(config);
 let  VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
 console.log('database', VIRTUAL_DANCE_FLOOR); 
 
-VIRTUAL_DANCE_FLOOR.on("value", snapshot => { 
-  console.log('snapshot', snapshot.val()); 
-}); 
-
-
+console.log('x', 'y', x, y); 
+function writeUserData(x, y) {
+  firebase.database().ref().set({
+    x: x,
+    y: y,
+  });
+}
 console.log('database', VIRTUAL_DANCE_FLOOR); 

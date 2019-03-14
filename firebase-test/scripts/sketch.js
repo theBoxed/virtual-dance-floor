@@ -9,6 +9,9 @@ function setup() {
   stroke(255, 100);
 }
 
+function getX() { return x; }
+function getY() { return y; }
+
 function draw() {
   background(0);
 
