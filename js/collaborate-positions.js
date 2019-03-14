@@ -12,8 +12,8 @@ let userId = Math.floor(Math.random() * 40000);
 let VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
 let users = VIRTUAL_DANCE_FLOOR.child('users').push().key; 
 
-function writeUserData(x, y, angle1, userId) {
-  firebase.database().ref(`users/userId:${userId}`).set({x, y, angle1});
+function writeUserData(joints) {
+  firebase.database().ref(`users/userId:${userId}`).set({joints});
 }
 
 var usersRef = firebase.database().ref('users/');
@@ -23,6 +23,8 @@ usersRef.on('value', function(snapshot) {
 
 function loopThroughUsers(users){ 
   for (prop in users){ 
-    console.log('prop', prop); 
+    if (prop !== `userId:${userId}`){ 
+      Draw.drawPose(users[prop].joints, {color : 'blue'});
+    }
   }
 }

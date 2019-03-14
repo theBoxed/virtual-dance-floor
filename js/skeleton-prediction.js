@@ -13,6 +13,7 @@
     background(0);
     local.update(Draw.getPose());
     if (local.data.pose != null) {
+      writeUserData(local.data.pose); 
       Draw.drawPose(local.data.pose, { color: local.data.color });
     }
   }
