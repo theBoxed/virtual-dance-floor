@@ -7,24 +7,15 @@ var config = {
   messagingSenderId: "542923101372"
 };
 firebase.initializeApp(config);
-
+let userId = Math.floor(Math.random() * 40000); 
 let VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
 let person = VIRTUAL_DANCE_FLOOR.child(userId).push().key;
-console.log('database', VIRTUAL_DANCE_FLOOR); 
-
 
 function writeUserData(x, y, userId) {
-  console.log('userdata', x, y, userId); 
   firebase.database().ref(userId).set({
-    userId, userId, 
     x: x,
     y: y,
   });
 }
 
-// var xPosition = firebase.database().ref(x);
-// xPosition.on('value', function(snapshot) {
-//   updateStarCount(postElement, snapshot.val());
-//   console.log('snapshot', snapshot); 
-// });
-console.log('database', VIRTUAL_DANCE_FLOOR); 
+
