@@ -22,9 +22,13 @@ usersRef.on('value', function(snapshot) {
 });
 
 function loopThroughUsers(users){ 
+  console.log('users', users); 
+
   for (prop in users){ 
+    console.log('users', users[prop].joints); 
+
     if (prop !== `userId:${userId}`){ 
-      Draw.drawPose(users[prop].joints, {color : 'blue'});
+      Draw.drawPose(users[prop].joints, { color: local.data.color });
     }
   }
 }
