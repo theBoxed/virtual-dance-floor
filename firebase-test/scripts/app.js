@@ -6,6 +6,7 @@ var config = {
   storageBucket: "virtual-dance-floor.appspot.com",
   messagingSenderId: "542923101372"
 };
+
 firebase.initializeApp(config);
 let userId = Math.floor(Math.random() * 40000); 
 let VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
@@ -18,4 +19,14 @@ function writeUserData(x, y, userId) {
   });
 }
 
+var usersRef = firebase.database().ref('users/');
+usersRef.on('value', function(snapshot) {
+  loopThroughUsers(snapshot.val()); 
+});
 
+function loopThroughUsers(users){ 
+  console.log('users', users); 
+  for (prop in users){ 
+    console.log('prop', prop); 
+  }
+}
