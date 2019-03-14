@@ -9,10 +9,10 @@ var config = {
 firebase.initializeApp(config);
 let userId = Math.floor(Math.random() * 40000); 
 let VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
-let person = VIRTUAL_DANCE_FLOOR.child(userId).push().key;
+let users = VIRTUAL_DANCE_FLOOR.child('users').push().key; 
 
 function writeUserData(x, y, userId) {
-  firebase.database().ref(userId).set({
+  firebase.database().ref(`users/userId:${userId}`).set({
     x: x,
     y: y,
   });
