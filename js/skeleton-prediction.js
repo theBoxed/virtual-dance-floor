@@ -1,4 +1,5 @@
   let local;
+  let world = [];
 
   //Sets up the canvas and initializes the video.
   function setup() {
