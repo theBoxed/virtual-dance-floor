@@ -3,7 +3,7 @@ let x = 100,
   angle1 = 0.0,
   segLength = 50;
 
-let userId = Math.floor(Math.random() * 4); 
+let userId = Math.floor(Math.random() * 40000); 
 
 function setup() {
   createCanvas(710, 400);
