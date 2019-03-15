@@ -31,36 +31,49 @@ function setup() {
 }
 
 function writeUserData(joints) {
-  firebase.database().ref(`users/userId:${userId}`).set({ joints });
+  firebase
+    .database()
+    .ref(`users/userId:${userId}`)
+    .set({ joints });
 }
 
 function loopThroughUsers(users) {
-  console.log('users', users);
-
+  console.log('user', users);
   for (prop in users) {
-    console.log('users', users[prop].joints);
-
+    //if you're not yourself don't redraw
     if (prop !== `userId:${userId}`) {
-      Draw.drawPose(users[prop].joints, { color: dancer.data.color });
+      continue;
     }
+   
+    if(users[prop].joints !== null){
+
+      console.log('users - props', users[prop].joints)
+      Draw.drawPose(users[prop].joints, {color: [100]})
+    }
+
+    //   console.log('hello', users[prop])
+    // Draw.drawPose(users[prop].joints, { color: dancer.data.color });
   }
 }
 
 function draw() {
   background(0);
-  //update the skeleton 
+  //update the skeleton
   dancer.update(Draw.getPose());
   //draw the skeleton
   if (dancer.data.pose != null) {
-    // writeUserData(dancer.data.pose);
+    writeUserData(dancer.data.pose);
     Draw.drawPose(dancer.data.pose, { color: dancer.data.color });
   }
   //provides firebase with dancer updates
   writeUserData(dancer.data.pose);
 
-  firebase.database().ref('users/').once('value').then(function (snapshot){
-    loopThroughUsers(snapshot.val());
-  });
 
-
+  firebase
+    .database()
+    .ref(`users/`)
+    .once('value')
+    .then(function(snapshot) {
+      loopThroughUsers(snapshot.val());
+    });
 }
