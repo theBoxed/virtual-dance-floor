@@ -16,6 +16,7 @@
   
     //sets up camera - initializes the video
     Scene().start();
+    dancer = new Dancer(userId); 
   }
 
   // function draw() {
