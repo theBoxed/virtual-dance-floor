@@ -1,19 +1,40 @@
-function Scene(){ 
-  this.begin = function(){
-    this.video = createCapture(VIDEO);
-    this.video.size(width, height);
+const Scene = () => { 
+  let video = null;
+  let poseNet = null;
+  let pose0 = null;
+  let posenetObjs = [];
+  let trackSmooth = 0.3;
 
-    this.poseNet = ml5.poseNet(this.video);
+  const start = () => { 
+    video = createCapture(VIDEO)
+    video.size(width, height); 
+    // poseNet = ml5.poseNet(video); 
 
-    var self = this;
-
-    this.poseNet.on('pose', function (results) {
-      self.updatePose(results);
-    });
-
-    this.video.hide();
+    // poseNet.on('pose', results => { 
+    //   console.log('pose net is ready', results); 
+    // });  
   }
+
+  return { start }; 
 }
+// function Scene(){ 
+//   this.vi
+//   this.begin = function(){
+//     this.video = createCapture(VIDEO);
+//     this.video.size(width, height);
+
+//     this.poseNet = ml5.poseNet(this.video);
+
+//     var self = this;
+
+//     this.poseNet.on('pose', function (results) {
+//       self.updatePose(results);
+//     });
+
+//     this.video.hide();
+//   }
+// }
+
 const Draw = new function() {
   this.video = null;
   this.poseNet = null;
