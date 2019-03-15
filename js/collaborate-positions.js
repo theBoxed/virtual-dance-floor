@@ -12,8 +12,6 @@ let userId = Math.floor(Math.random() * 40000);
 let VIRTUAL_DANCE_FLOOR = firebase.database().ref(); 
 let users = VIRTUAL_DANCE_FLOOR.child('users').push().key; 
 
-
-
 function writeUserData(joints) {
   firebase.database().ref(`users/userId:${userId}`).set({joints});
 }
