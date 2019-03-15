@@ -1,14 +1,7 @@
-const Draw = new function() {
-  this.video = null;
-  this.poseNet = null;
-  this.pose0 = null;
-  this.posenetObjs = [];
-  this.trackSmooth = 0.3;
-
+function Scene(){ 
   this.begin = function(){
     this.video = createCapture(VIDEO);
     this.video.size(width, height);
-
 
     this.poseNet = ml5.poseNet(this.video);
 
@@ -20,6 +13,15 @@ const Draw = new function() {
 
     this.video.hide();
   }
+}
+const Draw = new function() {
+  this.video = null;
+  this.poseNet = null;
+  this.pose0 = null;
+  this.posenetObjs = [];
+  this.trackSmooth = 0.3;
+
+
 
   this.convertPose = function (posenet_obj) {
     var result = {}

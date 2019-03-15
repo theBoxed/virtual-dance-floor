@@ -1,20 +1,34 @@
-  let local;
+  let dancer;
+  let dancers = []; 
 
   //Sets up the canvas and initializes the video.
   function setup() {
     createCanvas(800, 600);
     background(0);
 
+    //sets up dancer
+    let userId = Math.floor(Math.random() * 40000); 
+    dancer = new Dancer(userId);
+    console.log('dancer userId', dancer.userId); 
+
+    //sets up firebase
+    firebase.initializeApp(config);
+  
+    //sets up camera - initializes the video
     Draw.begin();
-    local = new Dancer();
   }
 
   function draw() {
     background(0);
-    local.update(Draw.getPose());
-    if (local.data.pose != null) {
-      writeUserData(local.data.pose); 
-      Draw.drawPose(local.data.pose, { color: local.data.color });
+    
+    dancer.update(Draw.getPose());
+    console.log('pose',  dancer.pose)
+    if (dancer.pose != null) {
+      // writeUserData(local.data.pose);
+      let joints = dancer.pose; 
+      console.log('joints', joints); 
+      firebase.database().ref(`users/userId:${dancer.userId}`).set({joints});
+      Draw.drawPose(dancer.pose, { color: dancer.color });
     }
   }
 
