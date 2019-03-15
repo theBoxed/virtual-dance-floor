@@ -1,4 +1,4 @@
-const Scene = () => { 
+Scene = () => { 
   let video = null;
   let poseNet = null;
   let pose0 = null;

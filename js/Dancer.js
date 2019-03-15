@@ -35,7 +35,12 @@ const Dancer = (id, x, y) => {
     }
   }
 
-  const updatePose = (results) => {
+  const updatePose = () => {
+    if (pose0 != null) {
+      // writeUserData(local.data.pose);
+      firebase.database().ref(`users/userId:${dancer.userId}`).set({pose0});
+      drawPose(pose0, { color });
+    }
     posenetObjs = results;
     if (results.length > 0) {
       var newPose = convertPose(getLargestPosenetObj(results));
@@ -45,6 +50,7 @@ const Dancer = (id, x, y) => {
         lerpPose(pose0, newPose, trackSmooth);
       }
     }
+
   }
 
   const getLargestPosenetObj = (objs) => {
@@ -98,5 +104,5 @@ const Dancer = (id, x, y) => {
     pop();
   }
 
-  return {update, userId, pose, color}; 
+  return {update, userId, pose, color, updatePose}; 
 }
