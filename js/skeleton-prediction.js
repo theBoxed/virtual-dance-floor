@@ -17,3 +17,15 @@
       Draw.drawPose(local.data.pose, { color: local.data.color });
     }
   }
+
+  window.onbeforeunload = function (event) {
+    var message = 'Important: Please click on \'Save\' button to leave this page.';
+    if (typeof event == 'undefined') {
+        event = window.event;
+    }
+    if (event) {
+        //Browser window is closing
+        event.returnValue = message;
+    }
+    return message;
+};
