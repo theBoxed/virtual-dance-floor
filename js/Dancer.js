@@ -7,8 +7,9 @@ const Dancer = (id, x, y) => {
   let trackSmooth = 0.3;
 
   const update = (currPose) => { 
-    if (pose0 != null) {
-      // writeUserData(local.data.pose);
+    console.log('do we get here?', currPose); 
+    if (pose != null) {
+      writeUserData(local.data.pose);
       pose = currPose;
       firebase.database().ref(`users/userId:${dancer.userId}`).set({pose0});
       drawPose(pose0, { color });
@@ -42,19 +43,17 @@ const Dancer = (id, x, y) => {
     }
   }
 
-  // const updatePose = () => {
-
-  //   posenetObjs = results;
-  //   if (results.length > 0) {
-  //     var newPose = convertPose(getLargestPosenetObj(results));
-  //     if (pose0 == null) {
-  //       pose0 = newPose
-  //     } else {
-  //       lerpPose(pose0, newPose, trackSmooth);
-  //     }
-  //   }
-
-  // }
+  const initializeDancer = () => {
+    posenetObjs = results;
+    if (results.length > 0) {
+      var newPose = convertPose(getLargestPosenetObj(results));
+      if (pose0 == null) {
+        pose0 = newPose
+      } else {
+        lerpPose(pose0, newPose, trackSmooth);
+      }
+    }
+  }
 
   const getLargestPosenetObj = (objs) => {
     var max_i = 0;
@@ -111,5 +110,5 @@ const Dancer = (id, x, y) => {
     return userId; 
   }
 
-  return {update, getUserId, updatePose}; 
+  return { update, initializeDancer }; 
 }
