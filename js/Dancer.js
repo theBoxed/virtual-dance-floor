@@ -1,4 +1,4 @@
-const Dancer = (id, x, y) => { 
+const Dancer = (id) => { 
   let userId = id; 
   let pose = null; 
   let color = [100]; 
