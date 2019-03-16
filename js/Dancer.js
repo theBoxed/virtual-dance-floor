@@ -10,9 +10,7 @@ const Dancer = (id, x, y) => {
 
   const update = () => { 
     if (!pose && loaded) {
-      writeUserData(local.data.pose);
-      pose = currPose;
-      firebase.database().ref(`users/userId:${dancer.userId}`).set({pose0});
+      firebase.database().ref(`users/userId:${userId}`).set({pose0});
       drawPose(pose0, { color });
     }
   }
