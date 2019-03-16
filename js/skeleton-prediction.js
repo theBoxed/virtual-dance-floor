@@ -15,13 +15,13 @@ function setup() {
   firebase.initializeApp(config);
 
   //sets up camera - initializes the video
-  Scene().start();
+  const scene = Scene(); 
+  scene.start(); 
   dancer = Dancer(userId); 
 }
 
 function draw() {
   background(0);
-  
   dancer.update();
 }
 

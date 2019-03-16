@@ -1,21 +1,22 @@
 Scene = () => { 
   let video = null;
   let poseNet = null;
-  let pose0 = null;
-  let posenetObjs = [];
-  let trackSmooth = 0.3;
 
   const start = () => { 
     video = createCapture(VIDEO)
     video.size(width, height); 
-    // poseNet = ml5.poseNet(video); 
+    poseNet = ml5.poseNet(video); 
 
-    // poseNet.on('pose', results => { 
-    //   console.log('pose net is ready', results); 
-    // });  
+    poseNet.on('pose', results => { 
+      console.log('pose net is ready', results); 
+    });  
   }
 
-  return { start }; 
+  const getPoseNet = () => { 
+    return poseNet; 
+  }
+
+  return { start, getPoseNet }; 
 }
 
 // const Draw = new function() {
