@@ -3,9 +3,11 @@ const Dancer = () => {
   let pose = null; 
   let color = [100]; 
   let loaded = false; 
+  let done = false; 
 
   const update = () => { 
-    if (loaded) {
+    if (loaded && !done) {
+      console.log('hi')
       //write pose to firebase
       firebase.database().ref(`users/userId:${userId}`).set({pose});
       //draw pose
@@ -16,6 +18,7 @@ const Dancer = () => {
   const initialize = poseNet => { 
     //set up random userid
     userId = Math.floor(Math.random() * 40000); 
+    console.log('user', userId); 
 
     //contiously find new pose
     poseNet.on('pose', results => { 
@@ -24,8 +27,8 @@ const Dancer = () => {
     });  
   }
 
-  const delete = () => { 
-    firebase.database.ref(`users/userId:${userId}`).remove(); 
+  const remove = () => { 
+    firebase.database().ref(`users/userId:${userId}`).remove(); 
   }
 
   const _convertPose = (posenet_obj) => { 
@@ -135,5 +138,5 @@ const Dancer = () => {
     _drawFace(pose);
   }
 
-  return { update, initialize, delete }; 
+  return { update, initialize, remove, loaded, done }; 
 }
