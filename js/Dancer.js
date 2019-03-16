@@ -1,21 +1,27 @@
 const Dancer = (id, x, y) => { 
   let userId = id; 
-  let position = { x, y }; 
   let pose = null; 
   let pose0 = null; 
   let color = [100]; 
-  let posenetObjs = [];
   let trackSmooth = 0.3;
   let loaded = false; 
 
   const update = () => { 
     if (!pose && loaded) {
       firebase.database().ref(`users/userId:${userId}`).set({pose0});
-      drawPose(pose0, { color });
+      _drawPose(pose0, { color });
     }
   }
 
-  const convertPose = (posenet_obj) => { 
+  const initializeDancer = poseNet => { 
+    userId = Math.floor(Math.random() * 40000); 
+    poseNet.on('pose', results => { 
+      loaded = true; 
+      _updatePose(results); 
+    });  
+  }
+
+  const _convertPose = (posenet_obj) => { 
     var result = {}
     var kpts = posenet_obj.pose.keypoints
     for (var i = 0; i < kpts.length; i++) {
@@ -27,7 +33,7 @@ const Dancer = (id, x, y) => {
     return result;
   }
 
-  const lerpPose = (poseA, poseB, t) => {
+  const _lerpPose = (poseA, poseB, t) => {
     for (var k in poseB) {
       if (isNaN(poseA[k].x)) {
         poseA[k].x = poseB[k].x
@@ -42,28 +48,19 @@ const Dancer = (id, x, y) => {
     }
   }
 
-  const initializeDancer = poseNet => { 
-    userId = Math.floor(Math.random() * 40000); 
-    poseNet.on('pose', results => { 
-      loaded = true; 
-      updatePose(results); 
-    });  
-  }
-
-  const updatePose = (results) => {
+  const _updatePose = (results) => {
     posenetObjs = results;
     if (results.length > 0) {
-      console.log('hello'); 
-      var newPose = convertPose(getLargestPosenetObj(results));
+      var newPose = _convertPose(_getLargestPosenetObj(results));
       if (pose0 == null) {
         pose0 = newPose
       } else {
-        lerpPose(pose0, newPose, trackSmooth);
+        _lerpPose(pose0, newPose, trackSmooth);
       }
     }
   }
 
-  const getLargestPosenetObj = (objs) => {
+  const _getLargestPosenetObj = (objs) => {
     var max_i = 0;
     var max_d = 0;
     for (var i = 0; i < objs.length; i++) {
@@ -79,19 +76,16 @@ const Dancer = (id, x, y) => {
     return objs[max_i];
   }
 
-  const estimateSize = (pose) => {
+  const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
 
-  const drawBones = () => {
+  const _drawBones = () => {
     beginShape()
-    // for (var i = 0; i < arguments.length; i++) {
-    //   vertex(arguments[i].x, arguments[i].y);
-    // }
     endShape()
   }
 
-  const drawHead = (pose) => {
+  const _drawHead = (pose) => {
     var ang = atan2(pose.leftEar.y - pose.rightEar.y, pose.leftEar.x - pose.rightEar.x);
     var r = dist(pose.leftEar.x, pose.leftEar.y, pose.rightEar.x, pose.rightEar.y);
     arc((pose.leftEar.x + pose.rightEar.x) / 2, (pose.leftEar.y + pose.rightEar.y) / 2, r, r, ang, ang + PI);
@@ -101,8 +95,8 @@ const Dancer = (id, x, y) => {
     fill(255);
   }
 
-  const drawFace = (pose) => {
-    var s = estimateSize(pose);
+  const _drawFace = (pose) => {
+    var s = _estimateSize(pose);
     fill(255);
     ellipse(pose.leftEye.x, pose.leftEye.y, s * 0.8, s * 0.8);
     ellipse(pose.rightEye.x, pose.rightEye.y, s * 0.8, s * 0.8);
@@ -110,7 +104,7 @@ const Dancer = (id, x, y) => {
     pop();
   }
 
-  const drawPose = (pose, args) => {
+  const _drawPose = (pose, args) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
@@ -121,19 +115,18 @@ const Dancer = (id, x, y) => {
     strokeJoin(ROUND);
     fill(255);
 
-    drawBones(pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder);
+    _drawBones(pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder);
 
-        drawBones(pose.leftShoulder, pose.leftElbow, pose.leftWrist);
+        _drawBones(pose.leftShoulder, pose.leftElbow, pose.leftWrist);
 
-        drawBones(pose.rightShoulder, pose.rightElbow, pose.rightWrist);
+        _drawBones(pose.rightShoulder, pose.rightElbow, pose.rightWrist);
 
-        drawBones(pose.leftHip, pose.leftKnee, pose.leftAnkle);
-        drawBones(pose.rightHip, pose.rightKnee, pose.rightAnkle);
+        _drawBones(pose.leftHip, pose.leftKnee, pose.leftAnkle);
+        _drawBones(pose.rightHip, pose.rightKnee, pose.rightAnkle);
 
-        drawHead(pose);
+        _drawHead(pose);
 
-
-    drawFace(pose);
+    _drawFace(pose);
   }
 
   return { update, initializeDancer }; 
