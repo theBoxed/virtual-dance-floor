@@ -11,16 +11,28 @@ function setup() {
   firebase.initializeApp(config);
 
   //sets up camera - initializes the video
-  const scene = Scene(); 
-  scene.start(); 
+  const scene = Scene();
+  scene.start();
 
   //sets up dancer
-  dancer = Dancer(); 
-  dancer.initialize(scene.getPoseNet()); 
+  dancer = Dancer();
+  dancer.initialize(scene.getPoseNet());
 
   //TODO: find other dancers
-  // firebase returns all of the users
-  // dancers = all of the users
+  // My browser tells firebase I Joined - done in dancer.update()
+  // Firebase says awesome, confirmed and here is everyone you're with
+  firebase
+    .database()
+    .ref('users/')
+    .once('value')
+    .then((world)=> {
+      for(let user in world.val()){
+        participants.push(Participant().initialize(world.val()[user], user));
+      }
+      console.log('part', participants);
+      return participants;
+    })
+   
 }
 
 //Clears canvas, and re-draws dancer
@@ -35,28 +47,32 @@ function draw() {
   background(0);
   dancer.update();
 
-  firebase.database().ref('users/').once('value').then(snapshot => { 
-    console.log('snapshot', snapshot.val()); 
-  });
+  firebase
+    .database()
+    .ref('users/')
+    .once('value')
+    .then(snapshot => {
+      // console.log('snapshot', snapshot.val());
+    });
 
   //TODO: loop through other dancers and draw them
 }
 
 var config = {
-  apiKey: "AIzaSyAqtz0eHO33noqIR6CMDPLvEs2dkqBf2Ag",
-  authDomain: "virtual-dance-floor.firebaseapp.com",
-  databaseURL: "https://virtual-dance-floor.firebaseio.com",
-  projectId: "virtual-dance-floor",
-  storageBucket: "virtual-dance-floor.appspot.com",
-  messagingSenderId: "542923101372"
+  apiKey: 'AIzaSyAqtz0eHO33noqIR6CMDPLvEs2dkqBf2Ag',
+  authDomain: 'virtual-dance-floor.firebaseapp.com',
+  databaseURL: 'https://virtual-dance-floor.firebaseio.com',
+  projectId: 'virtual-dance-floor',
+  storageBucket: 'virtual-dance-floor.appspot.com',
+  messagingSenderId: '542923101372'
 };
 
-window.addEventListener("beforeunload", function (e) {
-  noLoop(); 
-  var confirmationMessage = "\o/";
-  dancer.done = true; 
+window.addEventListener('beforeunload', function(e) {
+  noLoop();
+  var confirmationMessage = 'o/';
+  dancer.done = true;
 
   (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-  dancer.remove(); 
-  return confirmationMessage;                            //Webkit, Safari, Chrome
+  dancer.remove();
+  return confirmationMessage; //Webkit, Safari, Chrome
 });
