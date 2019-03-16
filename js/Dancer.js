@@ -1,4 +1,4 @@
-const Dancer = (id) => { 
+const Dancer = () => { 
   let userId = id; 
   let pose = null; 
   let color = [100]; 
@@ -122,16 +122,12 @@ const Dancer = (id) => {
     fill(255);
 
     _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
+    _drawBones([pose.leftShoulder, pose.leftElbow, pose.leftWrist]);
+    _drawBones([pose.rightShoulder, pose.rightElbow, pose.rightWrist]);
+    _drawBones([pose.leftHip, pose.leftKnee, pose.leftAnkle]);
+    _drawBones([pose.rightHip, pose.rightKnee, pose.rightAnkle]);
 
-        _drawBones([pose.leftShoulder, pose.leftElbow, pose.leftWrist]);
-
-        _drawBones([pose.rightShoulder, pose.rightElbow, pose.rightWrist]);
-
-        _drawBones([pose.leftHip, pose.leftKnee, pose.leftAnkle]);
-        _drawBones([pose.rightHip, pose.rightKnee, pose.rightAnkle]);
-
-        _drawHead(pose);
-
+    _drawHead(pose);
     _drawFace(pose);
   }
 
