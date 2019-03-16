@@ -7,7 +7,7 @@ const Dancer = (id, x, y) => {
   let trackSmooth = 0.3;
 
   const update = (currPose) => { 
-    console.log('do we get here?', currPose); 
+    // console.log('do we get here?', currPose); 
     if (pose != null) {
       writeUserData(local.data.pose);
       pose = currPose;
@@ -43,8 +43,15 @@ const Dancer = (id, x, y) => {
     }
   }
 
-  const initializeDancer = () => {
+  const initializeDancer = poseNet => { 
+    poseNet.on('pose', results => { 
+      updatePose(results); 
+    });  
+  }
+
+  const updatePose = (results) => {
     posenetObjs = results;
+    console.log('results', results); 
     if (results.length > 0) {
       var newPose = convertPose(getLargestPosenetObj(results));
       if (pose0 == null) {

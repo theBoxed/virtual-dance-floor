@@ -5,7 +5,7 @@ let dancers = [];
 function setup() {
   createCanvas(800, 600);
   background(0);
-  
+
   //sets up firebase
   firebase.initializeApp(config);
 
@@ -16,6 +16,7 @@ function setup() {
   //sets up dancer
   let userId = Math.floor(Math.random() * 40000); 
   dancer = Dancer(userId); 
+  console.log('posenet', scene.getPoseNet()); 
   dancer.initializeDancer(scene.getPoseNet()); 
 }
 
