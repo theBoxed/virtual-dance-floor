@@ -2,13 +2,15 @@ const Dancer = (id, x, y) => {
   let userId = id; 
   let position = { x, y }; 
   let pose = null; 
+  let pose0 = null; 
   let color = [100]; 
   let posenetObjs = [];
   let trackSmooth = 0.3;
 
-  const update = (currPose) => { 
-    // console.log('do we get here?', currPose); 
+  const update = () => { 
+    console.log('pose', pose, 'pose0', pose0); 
     if (pose != null) {
+      // console.log('do we get here?', currPose); 
       writeUserData(local.data.pose);
       pose = currPose;
       firebase.database().ref(`users/userId:${dancer.userId}`).set({pose0});
@@ -44,6 +46,7 @@ const Dancer = (id, x, y) => {
   }
 
   const initializeDancer = poseNet => { 
+    userId = Math.floor(Math.random() * 40000); 
     poseNet.on('pose', results => { 
       updatePose(results); 
     });  
@@ -51,7 +54,6 @@ const Dancer = (id, x, y) => {
 
   const updatePose = (results) => {
     posenetObjs = results;
-    console.log('results', results); 
     if (results.length > 0) {
       var newPose = convertPose(getLargestPosenetObj(results));
       if (pose0 == null) {
@@ -116,6 +118,35 @@ const Dancer = (id, x, y) => {
   const getUserId = () => { 
     return userId; 
   }
+
+  const drawPose = (pose, args) => {
+    console.log('drawPose', pose, args); 
+    if (args == undefined) { args = {} }
+    if (args.color == undefined) { args.color = [255, 255, 255] }
+
+    push();
+    colorMode(HSB, 255);
+    stroke.apply(this, args.color);
+    strokeWeight(4);
+    strokeJoin(ROUND);
+    fill(255);
+
+    this.drawBones(pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder);
+
+        this.drawBones(pose.leftShoulder, pose.leftElbow, pose.leftWrist);
+
+        this.drawBones(pose.rightShoulder, pose.rightElbow, pose.rightWrist);
+
+        this.drawBones(pose.leftHip, pose.leftKnee, pose.leftAnkle);
+        this.drawBones(pose.rightHip, pose.rightKnee, pose.rightAnkle);
+
+        this.drawHead(pose);
+
+
+    this.drawFace(pose);
+  }
+
+  
 
   return { update, initializeDancer }; 
 }
