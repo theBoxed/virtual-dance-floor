@@ -1,15 +1,14 @@
 const Dancer = (id, x, y) => { 
   let userId = id; 
   let pose = null; 
-  let pose0 = null; 
   let color = [100]; 
-  let trackSmooth = 0.3;
   let loaded = false; 
 
   const update = () => { 
-    if (!pose && loaded) {
-      firebase.database().ref(`users/userId:${userId}`).set({pose0});
-      _drawPose(pose0, { color });
+    console.log('pose', pose); 
+    if (loaded) {
+      firebase.database().ref(`users/userId:${userId}`).set({pose});
+      _drawPose(pose, { color });
     }
   }
 
@@ -52,10 +51,10 @@ const Dancer = (id, x, y) => {
     posenetObjs = results;
     if (results.length > 0) {
       let newPose = _convertPose(_getLargestPosenetObj(results));
-      if (pose0 == null) {
-        pose0 = newPose
+      if (pose == null) {
+        pose = newPose
       } else {
-        _lerpPose(pose0, newPose, trackSmooth);
+        _lerpPose(pose, newPose, 0.3);
       }
     }
   }

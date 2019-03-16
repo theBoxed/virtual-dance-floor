@@ -15,7 +15,6 @@ function setup() {
 
   //sets up dancer
   dancer = Dancer(); 
-  console.log('posenet', scene.getPoseNet()); 
   dancer.initializeDancer(scene.getPoseNet()); 
 }
 
