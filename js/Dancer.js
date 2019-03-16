@@ -7,7 +7,6 @@ const Dancer = () => {
 
   const update = () => { 
     if (loaded && !done) {
-      console.log('hi')
       //write pose to firebase
       firebase.database().ref(`users/userId:${userId}`).set({pose});
       //draw pose
@@ -18,7 +17,6 @@ const Dancer = () => {
   const initialize = poseNet => { 
     //set up random userid
     userId = Math.floor(Math.random() * 40000); 
-    console.log('user', userId); 
 
     //contiously find new pose
     poseNet.on('pose', results => { 
