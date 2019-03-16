@@ -16,12 +16,16 @@ function setup() {
   //sets up dancer
   dancer = Dancer(); 
   dancer.initialize(scene.getPoseNet()); 
+
+  //find other dancers
 }
 
 //Clears canvas, and re-draws dancer
 function draw() {
   background(0);
   dancer.update();
+  
+  //loop through other dancers and draw them
 }
 
 var config = {
