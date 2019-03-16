@@ -14,8 +14,7 @@ function setup() {
   scene.start(); 
 
   //sets up dancer
-  let userId = Math.floor(Math.random() * 40000); 
-  dancer = Dancer(userId); 
+  dancer = Dancer(); 
   console.log('posenet', scene.getPoseNet()); 
   dancer.initializeDancer(scene.getPoseNet()); 
 }
