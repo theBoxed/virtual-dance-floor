@@ -130,19 +130,19 @@ const Dancer = (id, x, y) => {
     strokeJoin(ROUND);
     fill(255);
 
-    this.drawBones(pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder);
+    drawBones(pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder);
 
-        this.drawBones(pose.leftShoulder, pose.leftElbow, pose.leftWrist);
+        drawBones(pose.leftShoulder, pose.leftElbow, pose.leftWrist);
 
-        this.drawBones(pose.rightShoulder, pose.rightElbow, pose.rightWrist);
+        drawBones(pose.rightShoulder, pose.rightElbow, pose.rightWrist);
 
-        this.drawBones(pose.leftHip, pose.leftKnee, pose.leftAnkle);
-        this.drawBones(pose.rightHip, pose.rightKnee, pose.rightAnkle);
+        drawBones(pose.leftHip, pose.leftKnee, pose.leftAnkle);
+        drawBones(pose.rightHip, pose.rightKnee, pose.rightAnkle);
 
-        this.drawHead(pose);
+        drawHead(pose);
 
 
-    this.drawFace(pose);
+    drawFace(pose);
   }
 
   
