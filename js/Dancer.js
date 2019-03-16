@@ -83,8 +83,11 @@ const Dancer = (id, x, y) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
 
-  const _drawBones = () => {
+  const _drawBones = arguments => {
     beginShape()
+    for (let i = 0; i < arguments.length; i++) {
+      vertex(arguments[i].x, arguments[i].y);
+    }
     endShape()
   }
 
@@ -118,14 +121,14 @@ const Dancer = (id, x, y) => {
     strokeJoin(ROUND);
     fill(255);
 
-    _drawBones(pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder);
+    _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
 
-        _drawBones(pose.leftShoulder, pose.leftElbow, pose.leftWrist);
+        _drawBones([pose.leftShoulder, pose.leftElbow, pose.leftWrist]);
 
-        _drawBones(pose.rightShoulder, pose.rightElbow, pose.rightWrist);
+        _drawBones([pose.rightShoulder, pose.rightElbow, pose.rightWrist]);
 
-        _drawBones(pose.leftHip, pose.leftKnee, pose.leftAnkle);
-        _drawBones(pose.rightHip, pose.rightKnee, pose.rightAnkle);
+        _drawBones([pose.leftHip, pose.leftKnee, pose.leftAnkle]);
+        _drawBones([pose.rightHip, pose.rightKnee, pose.rightAnkle]);
 
         _drawHead(pose);
 
