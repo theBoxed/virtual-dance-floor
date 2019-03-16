@@ -6,11 +6,10 @@ const Dancer = (id, x, y) => {
   let color = [100]; 
   let posenetObjs = [];
   let trackSmooth = 0.3;
+  let loaded = false; 
 
   const update = () => { 
-    console.log('pose', pose, 'pose0', pose0); 
-    if (pose != null) {
-      // console.log('do we get here?', currPose); 
+    if (!pose && loaded) {
       writeUserData(local.data.pose);
       pose = currPose;
       firebase.database().ref(`users/userId:${dancer.userId}`).set({pose0});
@@ -48,6 +47,7 @@ const Dancer = (id, x, y) => {
   const initializeDancer = poseNet => { 
     userId = Math.floor(Math.random() * 40000); 
     poseNet.on('pose', results => { 
+      loaded = true; 
       updatePose(results); 
     });  
   }
@@ -55,6 +55,7 @@ const Dancer = (id, x, y) => {
   const updatePose = (results) => {
     posenetObjs = results;
     if (results.length > 0) {
+      console.log('hello'); 
       var newPose = convertPose(getLargestPosenetObj(results));
       if (pose0 == null) {
         pose0 = newPose
