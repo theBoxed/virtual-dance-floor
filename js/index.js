@@ -1,6 +1,6 @@
 let dancer;
 let dancers = []; 
-let count = 0; 
+
 //Sets up the canvas and initializes the video.
 function setup() {
   createCanvas(800, 600);
