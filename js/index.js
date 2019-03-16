@@ -15,7 +15,7 @@ function setup() {
 
   //sets up dancer
   dancer = Dancer(); 
-  dancer.initializeDancer(scene.getPoseNet()); 
+  dancer.initialize(scene.getPoseNet()); 
 }
 
 //Clears canvas, and re-draws dancer
@@ -33,14 +33,15 @@ var config = {
   messagingSenderId: "542923101372"
 };
 
-// window.onbeforeunload = function (event) {
-//   var message = 'Important: Please click on \'Save\' button to leave this page.';
-//   if (typeof event == 'undefined') {
-//       event = window.event;
-//   }
-//   if (event) {
-//       //Browser window is closing
-//       event.returnValue = message;
-//   }
-//   return message;
-// };
+window.onbeforeunload = function (event) {
+  dancer.delete(); 
+  // var message = 'Important: Please click on \'Save\' button to leave this page.';
+  // if (typeof event == 'undefined') {
+  //     event = window.event;
+  // }
+  // if (event) {
+  //     //Browser window is closing
+  //     event.returnValue = message;
+  // }
+  // return message;
+};
