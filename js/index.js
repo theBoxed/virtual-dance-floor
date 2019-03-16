@@ -27,9 +27,13 @@ function setup() {
     .once('value')
     .then((world)=> {
       for(let user in world.val()){
-        participants.push(Participant().initialize(world.val()[user], user));
+        // console.log('USER',  user )
+        // console.log('getUserId',dancer.getUserId());
+        if(user !== dancer.getUserId()) {
+          // console.log('userID', user);
+          participants.push(Participant().initialize(world.val()[user], user));
+        }
       }
-      console.log('part', participants);
       return participants;
     })
    
@@ -56,6 +60,11 @@ function draw() {
     });
 
   //TODO: loop through other dancers and draw them
+
+  // for(let i = 0; i < participants.length; i++){
+  //   dancer._drawPose(participants)
+  //   // if(participants[i].userId ===)
+  // }
 }
 
 var config = {

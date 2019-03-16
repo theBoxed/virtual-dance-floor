@@ -16,7 +16,6 @@ const Participant = () => {
   let color = [200]; 
 
   const initialize = (user, userId) => {
-    console.log('user', user);
     userId = userId;
     pose = user.pose;
     return {
@@ -26,9 +25,14 @@ const Participant = () => {
     }
   }
 
+  const update = () => {
+
+  }
+
   return {
     initialize,
-    userId
+    userId,
+    update
   }
 
 
