@@ -1,5 +1,6 @@
 let dancer;
-let dancers = []; 
+let dancers = [];
+let participants = [];
 
 //Sets up the canvas and initializes the video.
 function setup() {
@@ -17,11 +18,20 @@ function setup() {
   dancer = Dancer(); 
   dancer.initialize(scene.getPoseNet()); 
 
-  //find other dancers
+  //TODO: find other dancers
+  // firebase returns all of the users
+  // dancers = all of the users
 }
 
 //Clears canvas, and re-draws dancer
 function draw() {
+  // update dancer skeleton
+  // draw the skeleton if pose !== null
+  //update firebase
+  //draw all other user skeletons
+  //loop through dancers.
+  //
+
   background(0);
   dancer.update();
 
@@ -29,7 +39,7 @@ function draw() {
     console.log('snapshot', snapshot.val()); 
   });
 
-  //loop through other dancers and draw them
+  //TODO: loop through other dancers and draw them
 }
 
 var config = {
