@@ -79,19 +79,15 @@ const Dancer = (id, x, y) => {
     return objs[max_i];
   }
 
-  const getPose = () => {
-    return pose0;
-  }
-
   const estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
 
   const drawBones = () => {
     beginShape()
-    for (var i = 0; i < arguments.length; i++) {
-      vertex(arguments[i].x, arguments[i].y);
-    }
+    // for (var i = 0; i < arguments.length; i++) {
+    //   vertex(arguments[i].x, arguments[i].y);
+    // }
     endShape()
   }
 
@@ -114,12 +110,7 @@ const Dancer = (id, x, y) => {
     pop();
   }
 
-  const getUserId = () => { 
-    return userId; 
-  }
-
   const drawPose = (pose, args) => {
-    console.log('drawPose', pose, args); 
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
@@ -144,8 +135,6 @@ const Dancer = (id, x, y) => {
 
     drawFace(pose);
   }
-
-  
 
   return { update, initializeDancer }; 
 }
