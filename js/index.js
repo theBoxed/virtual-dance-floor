@@ -24,7 +24,11 @@ function setup() {
 function draw() {
   background(0);
   dancer.update();
-  
+
+  firebase.database().ref('users/').once('value').then(snapshot => { 
+    console.log('snapshot', snapshot.val()); 
+  });
+
   //loop through other dancers and draw them
 }
 
