@@ -5,15 +5,19 @@ const Dancer = (id, x, y) => {
   let loaded = false; 
 
   const update = () => { 
-    console.log('pose', pose); 
     if (loaded) {
+      //write pose to firebase
       firebase.database().ref(`users/userId:${userId}`).set({pose});
+      //draw pose
       _drawPose(pose, { color });
     }
   }
 
   const initializeDancer = poseNet => { 
+    //set up random userid
     userId = Math.floor(Math.random() * 40000); 
+
+    //contiously find new pose
     poseNet.on('pose', results => { 
       loaded = true; 
       _updatePose(results); 
