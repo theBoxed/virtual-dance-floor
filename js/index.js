@@ -26,16 +26,15 @@ function setup() {
 //Clears canvas, and re-draws dancer
 function draw() {
   background(0);
-  // dancer.update();
+  //updates current user
+  dancer.update();
   
   //loops through participants and updates them
   for(let i = 0; i < participants.length; i++){
     if(participants[i].getUserId !== null) {
-      // console.log('participants user id', participants[i].id); 
       participants[i].update();
     }
   }
-  // console.log('dancer id', dancer.id)
 }
 
 function initializeParticipants(){ 

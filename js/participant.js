@@ -1,38 +1,33 @@
-//All other dancers that are not yourself
-
-const Participant = () => {
+/**
+  //All other dancers that are not yourself
   //WHAT'S DIFFERENT
   //Loaded or done
   //When writing to firebase we are writing to an array of joints
-  //When we receive data from FB we reset the joints array
-  //Data from firebase is an array of joints that we loop through in the _drawPose
+  //TODO: When we receive data from FB we reset the joints array
+  //TODO: Data from firebase is an array of joints that we loop through in the _drawPose
   //Participants don't need posenet
 
   //WHAT'S THE SAME
   //pose, color, userId
-  
+*/
+const Participant = () => {
   let _id = null;
   let _pose = null; 
   let color = [100]; 
 
-  const findPosition = () => { 
+  const update = () => {
+    _drawPose(_pose, {color})
+    _findPosition()
+  }
+
+  const _findPosition = () => { 
     firebase
     .database()
     .ref(`users/${_id}`)
     .once('value')
     .then(snapshot => {
-      _pose = snapshot.val().pose; 
-      // _drawPose(snapshot.val().pose, { color })
+      _pose = snapshot.val().pose;
     });  
-  }
-  const update = () => {
-      console.log('pose', _pose )
-    _drawPose(_pose, {color})
-    findPosition()
-  
-
-    // ÷if (_pose.leftAnkle.x != null) _drawPose(_pose, { color })
-      // _drawPose(_pose, { color })
   }
 
   const _estimateSize = (pose) => {
@@ -48,7 +43,6 @@ const Participant = () => {
   }
 
   const _drawHead = (pose) => {
-    // console.log('drawing head', pose); 
     let ang = atan2(pose.leftEar.y - pose.rightEar.y, pose.leftEar.x - pose.rightEar.x);
     let r = dist(pose.leftEar.x, pose.leftEar.y, pose.rightEar.x, pose.rightEar.y);
     arc((pose.leftEar.x + pose.rightEar.x) / 2, (pose.leftEar.y + pose.rightEar.y) / 2, r, r, ang, ang + PI);
@@ -68,7 +62,6 @@ const Participant = () => {
   }
 
   const _drawPose = (pose, args) => {
-    console.log('drawing pose participant',  pose, args); 
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
