@@ -116,6 +116,7 @@ const Dancer = () => {
   }
 
   const _drawPose = (pose, args) => {
+    console.log('drawing pose dancer',  pose, args); 
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 

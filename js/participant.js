@@ -12,18 +12,26 @@ const Participant = () => {
   //pose, color, userId
   
   let _id = null;
+  let _pose = null; 
   let color = [100]; 
 
-  const update = () => {
-    // _drawPose(_pose, { color })
+  const findPosition = () => { 
     firebase
-      .database()
-      .ref(`users/${_id}`)
-      .once('value')
-      .then(snapshot => {
-        _pose = snapshot.val().pose; 
-        _drawPose(snapshot.val().pose, { color })
-      });  
+    .database()
+    .ref(`users/${_id}`)
+    .once('value')
+    .then(snapshot => {
+      _pose = snapshot.val().pose; 
+      // _drawPose(snapshot.val().pose, { color })
+    });  
+  }
+  const update = () => {
+      console.log('pose', _pose )
+    _drawPose(_pose, {color})
+    findPosition()
+  
+
+    // ÷if (_pose.leftAnkle.x != null) _drawPose(_pose, { color })
       // _drawPose(_pose, { color })
   }
 
@@ -40,7 +48,7 @@ const Participant = () => {
   }
 
   const _drawHead = (pose) => {
-    console.log('drawing head', pose); 
+    // console.log('drawing head', pose); 
     let ang = atan2(pose.leftEar.y - pose.rightEar.y, pose.leftEar.x - pose.rightEar.x);
     let r = dist(pose.leftEar.x, pose.leftEar.y, pose.rightEar.x, pose.rightEar.y);
     arc((pose.leftEar.x + pose.rightEar.x) / 2, (pose.leftEar.y + pose.rightEar.y) / 2, r, r, ang, ang + PI);
@@ -51,8 +59,7 @@ const Participant = () => {
   }
 
   const _drawFace = (pose) => {
-    let s = _estimateSize(pose);
-    console.log('s', s); 
+    let s = _estimateSize(pose); 
     fill(255);
     ellipse(pose.leftEye.x, pose.leftEye.y, s * 0.8, s * 0.8);
     ellipse(pose.rightEye.x, pose.rightEye.y, s * 0.8, s * 0.8);
@@ -61,7 +68,7 @@ const Participant = () => {
   }
 
   const _drawPose = (pose, args) => {
-    console.log('drawing pose',  pose, args); 
+    console.log('drawing pose participant',  pose, args); 
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 

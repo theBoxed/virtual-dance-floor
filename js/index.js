@@ -26,8 +26,8 @@ function setup() {
 //Clears canvas, and re-draws dancer
 function draw() {
   background(0);
-  dancer.update();
-
+  // dancer.update();
+  
   //loops through participants and updates them
   for(let i = 0; i < participants.length; i++){
     if(participants[i].getUserId !== null) {
@@ -47,7 +47,7 @@ function initializeParticipants(){
     for(let user in world.val()){ 
       if(user !== dancer.id) {
         let currParticipant = Participant();
-        currParticipant.pose = world.val()[user]; 
+        currParticipant.pose = world.val()[user].pose; 
         currParticipant.id = user; 
         participants.push(currParticipant);
       }
