@@ -40,6 +40,7 @@ const Participant = () => {
   }
 
   const _drawHead = (pose) => {
+    console.log('drawing head', pose); 
     let ang = atan2(pose.leftEar.y - pose.rightEar.y, pose.leftEar.x - pose.rightEar.x);
     let r = dist(pose.leftEar.x, pose.leftEar.y, pose.rightEar.x, pose.rightEar.y);
     arc((pose.leftEar.x + pose.rightEar.x) / 2, (pose.leftEar.y + pose.rightEar.y) / 2, r, r, ang, ang + PI);
@@ -51,6 +52,7 @@ const Participant = () => {
 
   const _drawFace = (pose) => {
     let s = _estimateSize(pose);
+    console.log('s', s); 
     fill(255);
     ellipse(pose.leftEye.x, pose.leftEye.y, s * 0.8, s * 0.8);
     ellipse(pose.rightEye.x, pose.rightEye.y, s * 0.8, s * 0.8);

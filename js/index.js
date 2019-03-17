@@ -28,15 +28,14 @@ function draw() {
   background(0);
   dancer.update();
 
-
+  //loops through participants and updates them
   for(let i = 0; i < participants.length; i++){
     if(participants[i].getUserId !== null) {
-      console.log('participants user id', participants[i].id); 
-      
+      // console.log('participants user id', participants[i].id); 
       participants[i].update();
     }
   }
-  console.log('dancer id', dancer.id)
+  // console.log('dancer id', dancer.id)
 }
 
 function initializeParticipants(){ 
@@ -61,8 +60,6 @@ window.addEventListener('beforeunload', function(e) {
   noLoop();
   var confirmationMessage = 'o/';
   dancer.done = true;
-
-  // (e || window.event).returnValue = confirmationMessage; //Gecko + IE
   dancer.remove();
   return confirmationMessage; //Webkit, Safari, Chrome
 });
