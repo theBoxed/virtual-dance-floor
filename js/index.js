@@ -29,25 +29,30 @@ function draw() {
   dancer.update();
 
   //TODO: loop through other dancers and draw them
- 
   for(let i = 0; i < participants.length; i++){
-    console.log(participants[i].getUserId);
     if(participants[i].getUserId !== null) {
-      console.log(participants[i]);
       participants[i].update();
     }
   }
-
 }
 
-var config = {
-  apiKey: 'AIzaSyAqtz0eHO33noqIR6CMDPLvEs2dkqBf2Ag',
-  authDomain: 'virtual-dance-floor.firebaseapp.com',
-  databaseURL: 'https://virtual-dance-floor.firebaseio.com',
-  projectId: 'virtual-dance-floor',
-  storageBucket: 'virtual-dance-floor.appspot.com',
-  messagingSenderId: '542923101372'
-};
+function initializeParticipants(){ 
+  firebase
+  .database()
+  .ref('users/')
+  .once('value')
+  .then((world)=> {
+    for(let user in world.val()){ 
+      if(user !== dancer.getUserId()) {
+        let currParticipant = Participant();
+        currParticipant.setPose = world.val()[user]; 
+        currParticipant.setUserId = user; 
+        participants.push(currParticipant);
+      }
+    }
+    return participants;
+  })
+}
 
 window.addEventListener('beforeunload', function(e) {
   noLoop();
@@ -59,23 +64,13 @@ window.addEventListener('beforeunload', function(e) {
   return confirmationMessage; //Webkit, Safari, Chrome
 });
 
-function initializeParticipants(){ 
-  firebase
-  .database()
-  .ref('users/')
-  .once('value')
-  .then((world)=> {
-    for(let user in world.val()){
 
-      if(user !== dancer.getUserId()) {
-        let currParticipant = Participant();
-        // currParticipant.initialize(world.val()[user], user)
-        currParticipant.setPose = world.val()[user]; 
-        currParticipant.setUserId = user; 
-        console.log('currParticpantId', currParticipant.getUserId); 
-        participants.push(currParticipant);
-      }
-    }
-    return participants;
-  })
-}
+var config = {
+  apiKey: 'AIzaSyAqtz0eHO33noqIR6CMDPLvEs2dkqBf2Ag',
+  authDomain: 'virtual-dance-floor.firebaseapp.com',
+  databaseURL: 'https://virtual-dance-floor.firebaseio.com',
+  projectId: 'virtual-dance-floor',
+  storageBucket: 'virtual-dance-floor.appspot.com',
+  messagingSenderId: '542923101372'
+};
+

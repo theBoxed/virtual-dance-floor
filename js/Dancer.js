@@ -21,7 +21,6 @@ const Dancer = () => {
   const initialize = poseNet => { 
     //set up random userid
     userId = Math.floor(Math.random() * 40000); 
-    console.log('herro', userId);
     //contiously find new pose
     poseNet.on('pose', results => { 
       loaded = true; 

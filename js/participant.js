@@ -15,19 +15,7 @@ const Participant = () => {
   let pose = null;
   let color = [200]; 
 
-  const initialize = (user, userId) => {
-    // console.log('init', user)
-    // console.log('init id ', userId);
-    userId = userId;
-    pose = user.pose;
-    return {
-      userId,
-      pose,
-      color
-    }
-  }
   const update = () => {
-    console.log('userId', userId);
     firebase
       .database()
       .ref(`users/${userId}`)
@@ -127,7 +115,6 @@ const Participant = () => {
   const _drawPose = (pose, args) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
-    console.log('draw', pose)
     push();
     colorMode(HSB, 255);
     stroke.apply(this, args.color);
@@ -147,9 +134,7 @@ const Participant = () => {
 
 
   return {
-    initialize,
     update, 
-    // getUserId, 
     get getUserId(){ 
       return userId; 
     },
