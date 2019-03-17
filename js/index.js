@@ -21,25 +21,7 @@ function setup() {
   //TODO: find other dancers
   // My browser tells firebase I Joined - done in dancer.update()
   // Firebase says awesome, confirmed and here is everyone you're with
-  firebase
-    .database()
-    .ref('users/')
-    .once('value')
-    .then((world)=> {
-      for(let user in world.val()){
-        // console.log('USER',  user )
-        // console.log('getUserId',dancer.getUserId());
-        if(user !== dancer.getUserId()) {
-          // console.log('userID', user);
-          let currParticipant = Participant();
-          currParticipant.initialize(world.val()[user], user)
-          participants.push(currParticipant);
-        }
-      }
-      // console.log('parts', participants);
-      return participants;
-    })
-   
+  initializeParticipants(); 
 }
 
 //Clears canvas, and re-draws dancer
@@ -95,3 +77,22 @@ window.addEventListener('beforeunload', function(e) {
   dancer.remove();
   return confirmationMessage; //Webkit, Safari, Chrome
 });
+
+function initializeParticipants(){ 
+  firebase
+  .database()
+  .ref('users/')
+  .once('value')
+  .then((world)=> {
+    for(let user in world.val()){
+      
+      if(user !== dancer.getUserId()) {
+        let currParticipant = Participant();
+        currParticipant.initialize(world.val()[user], user)
+        participants.push(currParticipant);
+      }
+    }
+    // console.log('parts', participants);
+    return participants;
+  })
+}
