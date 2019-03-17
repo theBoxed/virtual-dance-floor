@@ -66,6 +66,7 @@ const Dancer = () => {
       if (pose == null) {
         pose = newPose
       } else {
+        // pose = newPose;
         _lerpPose(pose, newPose, 0.3);
       }
     }

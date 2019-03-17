@@ -28,12 +28,15 @@ function draw() {
   background(0);
   dancer.update();
 
-  //TODO: loop through other dancers and draw them
+
   for(let i = 0; i < participants.length; i++){
     if(participants[i].getUserId !== null) {
+      console.log('participants user id', participants[i].id); 
+      
       participants[i].update();
     }
   }
+  console.log('dancer id', dancer.getUserId())
 }
 
 function initializeParticipants(){ 
@@ -45,8 +48,8 @@ function initializeParticipants(){
     for(let user in world.val()){ 
       if(user !== dancer.getUserId()) {
         let currParticipant = Participant();
-        currParticipant.setPose = world.val()[user]; 
-        currParticipant.setUserId = user; 
+        currParticipant.pose = world.val()[user]; 
+        currParticipant.id = user; 
         participants.push(currParticipant);
       }
     }
@@ -59,7 +62,7 @@ window.addEventListener('beforeunload', function(e) {
   var confirmationMessage = 'o/';
   dancer.done = true;
 
-  (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+  // (e || window.event).returnValue = confirmationMessage; //Gecko + IE
   dancer.remove();
   return confirmationMessage; //Webkit, Safari, Chrome
 });

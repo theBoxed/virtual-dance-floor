@@ -11,24 +11,20 @@ const Participant = () => {
   //WHAT'S THE SAME
   //pose, color, userId
   
-  let userId = null;
-  let pose = null;
-  let color = [200]; 
+  let _id = null;
+  let _pose = null;
+  let color = [100]; 
 
   const update = () => {
     firebase
       .database()
-      .ref(`users/${userId}`)
+      .ref(`users/${_id}`)
       .once('value')
       .then(snapshot => {
-        console.log('snapshot', userId, snapshot.val().pose);
-        pose = snapshot.val().pose; 
-        _drawPose(pose, {color})
-      });
-     
+        _pose = snapshot.val().pose; 
+        _drawPose(snapshot.val().pose, { color })
+      });  
   }
-
-
 
   const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
@@ -62,9 +58,10 @@ const Participant = () => {
   }
 
   const _drawPose = (pose, args) => {
-    console.log('hi')
+    console.log('drawing pose',  pose, args); 
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
+
     push();
     colorMode(HSB, 255);
     stroke.apply(this, args.color);
@@ -82,21 +79,16 @@ const Participant = () => {
     _drawFace(pose);
   }
 
-
   return {
     update, 
-    get getUserId(){ 
-      return userId; 
+    get id(){ 
+      return _id; 
     },
-    set setUserId(id){ 
-      userId = id; 
+    set id(id){ 
+      _id = id; 
     }, 
-    set setPose(spose){ 
-      pose = spose; 
+    set pose(pose){ 
+      _pose = pose; 
     }
   }
-
-
-
-
 }
