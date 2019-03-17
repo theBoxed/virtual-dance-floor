@@ -18,7 +18,6 @@ function setup() {
   dancer = Dancer();
   dancer.initialize(scene.getPoseNet());
 
-  //TODO: find other dancers
   // My browser tells firebase I Joined - done in dancer.update()
   // Firebase says awesome, confirmed and here is everyone you're with
   initializeParticipants(); 
@@ -26,35 +25,17 @@ function setup() {
 
 //Clears canvas, and re-draws dancer
 function draw() {
-  // update dancer skeleton
-  // draw the skeleton if pose !== null
-  //update firebase
-  //draw all other user skeletons
-  //loop through dancers.
-  //
-  // console.log('part -54', participants);
   background(0);
   dancer.update();
 
-  // firebase
-  //   .database()
-  //   .ref('users/')
-  //   .once('value')
-  //   .then(snapshot => {
-  //     // console.log('snapshot', snapshot.val());
-  //   });
-
   //TODO: loop through other dancers and draw them
  
-
   for(let i = 0; i < participants.length; i++){
     console.log(participants[i].getUserId());
     if(participants[i].getUserId() !== null) {
       console.log(participants[i]);
       participants[i].update();
     }
-    // Participa().update();
-    // if(participants[i].userId ===)
   }
 
 }
@@ -92,7 +73,6 @@ function initializeParticipants(){
         participants.push(currParticipant);
       }
     }
-    // console.log('parts', participants);
     return participants;
   })
 }
