@@ -25,7 +25,7 @@ const Dancer = () => {
   }
 
   const remove = () => { 
-    firebase.database().ref(`users/${userId}`).remove(); 
+    firebase.database().ref(`users/${_id}`).remove(); 
   }
 
   const _convertPose = (posenet_obj) => { 
