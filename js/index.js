@@ -36,7 +36,7 @@ function draw() {
       participants[i].update();
     }
   }
-  console.log('dancer id', dancer.getUserId())
+  console.log('dancer id', dancer.id)
 }
 
 function initializeParticipants(){ 
@@ -46,7 +46,7 @@ function initializeParticipants(){
   .once('value')
   .then((world)=> {
     for(let user in world.val()){ 
-      if(user !== dancer.getUserId()) {
+      if(user !== dancer.id) {
         let currParticipant = Participant();
         currParticipant.pose = world.val()[user]; 
         currParticipant.id = user; 

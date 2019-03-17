@@ -1,5 +1,5 @@
 const Dancer = () => { 
-  let userId = null; 
+  let _id = null; 
   let pose = null; 
   let color = [100]; 
   let loaded = false; 
@@ -8,19 +8,15 @@ const Dancer = () => {
   const update = () => { 
     if (loaded && !done) {
       //write pose to firebase
-      firebase.database().ref(`users/${userId}`).set({pose});
+      firebase.database().ref(`users/${_id}`).set({pose});
       //draw pose
       _drawPose(pose, { color });
     }
   }
   
-  const getUserId = () => {
-    return userId.toString();
-  }
-
   const initialize = poseNet => { 
     //set up random userid
-    userId = Math.floor(Math.random() * 40000); 
+    _id = Math.floor(Math.random() * 40000); 
     //contiously find new pose
     poseNet.on('pose', results => { 
       loaded = true; 
@@ -140,5 +136,9 @@ const Dancer = () => {
     _drawFace(pose);
   }
 
-  return Object.freeze({ update, initialize, remove, loaded, done, getUserId }); 
+  return Object.freeze({ update, initialize, remove, loaded, done,
+    get id() { 
+      return _id; 
+    }
+  }); 
 }

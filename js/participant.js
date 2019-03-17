@@ -12,10 +12,10 @@ const Participant = () => {
   //pose, color, userId
   
   let _id = null;
-  let _pose = null;
   let color = [100]; 
 
   const update = () => {
+    // _drawPose(_pose, { color })
     firebase
       .database()
       .ref(`users/${_id}`)
@@ -24,6 +24,7 @@ const Participant = () => {
         _pose = snapshot.val().pose; 
         _drawPose(snapshot.val().pose, { color })
       });  
+      // _drawPose(_pose, { color })
   }
 
   const _estimateSize = (pose) => {
