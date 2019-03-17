@@ -31,8 +31,8 @@ function draw() {
   //TODO: loop through other dancers and draw them
  
   for(let i = 0; i < participants.length; i++){
-    console.log(participants[i].getUserId());
-    if(participants[i].getUserId() !== null) {
+    console.log(participants[i].getUserId);
+    if(participants[i].getUserId !== null) {
       console.log(participants[i]);
       participants[i].update();
     }
@@ -66,10 +66,13 @@ function initializeParticipants(){
   .once('value')
   .then((world)=> {
     for(let user in world.val()){
-      
+
       if(user !== dancer.getUserId()) {
         let currParticipant = Participant();
-        currParticipant.initialize(world.val()[user], user)
+        // currParticipant.initialize(world.val()[user], user)
+        currParticipant.setPose = world.val()[user]; 
+        currParticipant.setUserId = user; 
+        console.log('currParticpantId', currParticipant.getUserId); 
         participants.push(currParticipant);
       }
     }

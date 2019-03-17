@@ -26,12 +26,6 @@ const Participant = () => {
       color
     }
   }
-
-  const getUserId = () => {
-    console.log('userID', userId);
-    return userId.toString()
-  }
-
   const update = () => {
     console.log('userId', userId);
     firebase
@@ -155,7 +149,16 @@ const Participant = () => {
   return {
     initialize,
     update, 
-    getUserId
+    // getUserId, 
+    get getUserId(){ 
+      return userId; 
+    },
+    set setUserId(id){ 
+      userId = id; 
+    }, 
+    set setPose(spose){ 
+      pose = spose; 
+    }
   }
 
 

@@ -140,5 +140,5 @@ const Dancer = () => {
     _drawFace(pose);
   }
 
-  return { update, initialize, remove, loaded, done, getUserId }; 
+  return Object.freeze({ update, initialize, remove, loaded, done, getUserId }); 
 }
