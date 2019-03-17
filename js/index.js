@@ -31,9 +31,12 @@ function setup() {
         // console.log('getUserId',dancer.getUserId());
         if(user !== dancer.getUserId()) {
           // console.log('userID', user);
-          participants.push(Participant().initialize(world.val()[user], user));
+          let currParticipant = Participant();
+          currParticipant.initialize(world.val()[user], user)
+          participants.push(currParticipant);
         }
       }
+      // console.log('parts', participants);
       return participants;
     })
    
@@ -47,24 +50,31 @@ function draw() {
   //draw all other user skeletons
   //loop through dancers.
   //
-
+  // console.log('part -54', participants);
   background(0);
   dancer.update();
 
-  firebase
-    .database()
-    .ref('users/')
-    .once('value')
-    .then(snapshot => {
-      // console.log('snapshot', snapshot.val());
-    });
+  // firebase
+  //   .database()
+  //   .ref('users/')
+  //   .once('value')
+  //   .then(snapshot => {
+  //     // console.log('snapshot', snapshot.val());
+  //   });
 
   //TODO: loop through other dancers and draw them
+ 
 
-  // for(let i = 0; i < participants.length; i++){
-  //   dancer._drawPose(participants)
-  //   // if(participants[i].userId ===)
-  // }
+  for(let i = 0; i < participants.length; i++){
+    console.log(participants[i].getUserId());
+    if(participants[i].getUserId() !== null) {
+      console.log(participants[i]);
+      participants[i].update();
+    }
+    // Participa().update();
+    // if(participants[i].userId ===)
+  }
+
 }
 
 var config = {
