@@ -15,11 +15,9 @@ function setup() {
   scene.start();
 
   //sets up dancer
-  // dancer = Object.assign(Dancer(), _draw());
   dancer.initialize(scene.getPoseNet());
 
-  // My browser tells firebase I Joined - done in dancer.update()
-  // Firebase says awesome, confirmed and here is everyone you're with
+  //sets up participants
   initializeParticipants(); 
 }
 
@@ -64,14 +62,3 @@ window.addEventListener('beforeunload', function(e) {
   dancer.remove();
   return confirmationMessage; //Webkit, Safari, Chrome
 });
-
-
-var config = {
-  apiKey: 'AIzaSyAqtz0eHO33noqIR6CMDPLvEs2dkqBf2Ag',
-  authDomain: 'virtual-dance-floor.firebaseapp.com',
-  databaseURL: 'https://virtual-dance-floor.firebaseio.com',
-  projectId: 'virtual-dance-floor',
-  storageBucket: 'virtual-dance-floor.appspot.com',
-  messagingSenderId: '542923101372'
-};
-
