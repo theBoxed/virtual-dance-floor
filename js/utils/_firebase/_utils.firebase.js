@@ -18,7 +18,7 @@ function initializeParticipants(){
 
 function updateDancer(dancer){ 
   dancer.update();
-  dancer.draw_drawPose(dancer.pose, {color: [100]})
+  dancer.draw._drawPose(dancer.pose, {color: [100]})
 }
 
 function updateParticipants(participants){ 
