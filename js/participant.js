@@ -1,9 +1,10 @@
 const Participant = () => {
-  let _id = null;
-  let _pose = null; 
-  let color = [100]; 
+  const participant = {}; 
+  participant.id = null;
+  participant.pose = null; 
+  participant.color = [100]; 
 
-  const update = () => {
+  participant.update = () => {
     _findPosition()
   }
 
@@ -17,19 +18,5 @@ const Participant = () => {
     });  
   }
 
-  return {
-    update, 
-    get id(){ 
-      return _id; 
-    },
-    set id(id){ 
-      _id = id; 
-    }, 
-    set pose(pose){ 
-      _pose = pose; 
-    }, 
-    get pose(){ 
-      return _pose; 
-    }
-  }
+  return Object.assign( participant, _draw()); 
 }

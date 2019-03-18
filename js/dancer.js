@@ -29,5 +29,5 @@ const Dancer = () => {
     firebase.database().ref(`users/${_id}`).remove(); 
   }
 
-  return { dancer }; 
+  return Object.assign( dancer, _draw(), _poseNet()); 
 }

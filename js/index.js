@@ -15,7 +15,7 @@ function setup() {
   scene.start();
 
   //sets up dancer
-  dancer = Object.assign(Dancer(), _draw());
+  // dancer = Object.assign(Dancer(), _draw());
   dancer.initialize(scene.getPoseNet());
 
   // My browser tells firebase I Joined - done in dancer.update()
