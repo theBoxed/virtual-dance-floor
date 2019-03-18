@@ -1,36 +1,33 @@
 const Dancer = () => { 
-  let _id = null; 
-  let pose = null; 
-  let color = [100]; 
-  let loaded = false; 
-  let done = false; 
+  dancer = {}; 
+  dancer.id = null; 
+  dancer.pose = null; 
+  dancer.color = null; 
+  //when poseNet is loaded for this dancer
+  dancer.loaded = false; 
+  //when user has left tab or browser
+  dancer.done = false; 
 
-  const update = () => { 
+  dancer.update = () => { 
     if (loaded && !done) {
       //write pose to firebase
       firebase.database().ref(`users/${_id}`).set({pose});
-      //draw pose
-      // _drawPose(pose, { color });
     }
   }
   
-  const initialize = poseNet => { 
+  dancer.initialize = poseNet => { 
     //set up random userid
-    _id = Math.floor(Math.random() * 40000); 
+    this.id = Math.floor(Math.random() * 40000); 
     //contiously find new pose
     poseNet.on('pose', results => { 
-      loaded = true; 
+      this.loaded = true; 
       _updatePose(results); 
     });  
   }
 
-  const remove = () => { 
+  dancer.remove = () => { 
     firebase.database().ref(`users/${_id}`).remove(); 
   }
 
-  return Object.freeze({ update, initialize, remove,
-    get id() { 
-      return _id; 
-    }
-  }); 
+  return { dancer }; 
 }
