@@ -20,18 +20,11 @@ function setup() {
   participants = initializeParticipants(); 
 }
 
-//Clears canvas, and re-draws dancer
+//Clears canvas, and re-draws dancer and participants
 function draw() {
   background(0);
-  //updates current user
   updateDancer(dancer); 
-  //loops through participants and updates them
-  for(let i = 0; i < participants.length; i++){
-    if(participants[i].getUserId !== null) {
-      participants[i].update();
-      participants[i].draw._drawPose(participants[i].pose, {color: [100]})
-    }
-  }
+  updateParticipants(participants)
 }
 
 window.addEventListener('beforeunload', function(e) {
