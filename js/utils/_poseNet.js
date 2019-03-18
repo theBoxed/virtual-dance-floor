@@ -1,5 +1,6 @@
 const _poseNet = () => { 
   const poseNet = {}; 
+  
   poseNet._updatePose = (results) => {
     posenetObjs = results;
     if (results.length > 0) {
@@ -11,7 +12,6 @@ const _poseNet = () => {
       }
     }
   }
-
 
   const _convertPose = (posenet_obj) => { 
     let result = {}
