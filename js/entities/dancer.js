@@ -9,7 +9,7 @@ const Dancer = () => {
   dancer.done = false; 
 
   dancer.update = () => { 
-    if (loaded && !done) {
+    if (this.loaded && !this.done) {
       //write pose to firebase
       firebase.database().ref(`users/${_id}`).set({pose});
     }
