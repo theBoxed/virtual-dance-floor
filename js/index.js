@@ -15,7 +15,7 @@ function setup() {
   scene.start();
 
   //sets up dancer
-  dancer = Dancer();
+  dancer = Object.assign(Dancer(), _draw());
   dancer.initialize(scene.getPoseNet());
 
   // My browser tells firebase I Joined - done in dancer.update()
@@ -28,6 +28,7 @@ function draw() {
   background(0);
   //updates current user
   dancer.update();
+  dancer.draw_drawPose(dancer.pose, {color: [100]})
   
   //loops through participants and updates them
   for(let i = 0; i < participants.length; i++){

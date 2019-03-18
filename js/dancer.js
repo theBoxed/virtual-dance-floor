@@ -10,7 +10,7 @@ const Dancer = () => {
       //write pose to firebase
       firebase.database().ref(`users/${_id}`).set({pose});
       //draw pose
-      _drawPose(pose, { color });
+      // _drawPose(pose, { color });
     }
   }
   
