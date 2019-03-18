@@ -15,3 +15,8 @@ function initializeParticipants(){
     return participants;
   })
 }
+
+function updateDancer(dancer){ 
+  dancer.update();
+  dancer.draw_drawPose(dancer.pose, {color: [100]})
+}

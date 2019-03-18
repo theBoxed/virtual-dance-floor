@@ -24,9 +24,7 @@ function setup() {
 function draw() {
   background(0);
   //updates current user
-  dancer.update();
-  dancer.draw_drawPose(dancer.pose, {color: [100]})
-  
+  updateDancer(dancer); 
   //loops through participants and updates them
   for(let i = 0; i < participants.length; i++){
     if(participants[i].getUserId !== null) {
