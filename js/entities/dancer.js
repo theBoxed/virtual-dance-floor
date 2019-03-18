@@ -21,7 +21,6 @@ const Dancer = () => {
     //contiously find new pose
     poseNet.on('pose', results => { 
       this.loaded = true; 
-      _updatePose(results); 
     });  
   }
 
