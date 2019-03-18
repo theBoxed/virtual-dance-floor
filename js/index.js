@@ -1,5 +1,4 @@
 let dancer;
-let dancers = [];
 let participants = [];
 
 //Sets up the canvas and initializes the video.
@@ -18,7 +17,7 @@ function setup() {
   dancer.initialize(scene.getPoseNet());
 
   //sets up participants
-  initializeParticipants(); 
+  participants = initializeParticipants(); 
 }
 
 //Clears canvas, and re-draws dancer
