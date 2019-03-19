@@ -1,5 +1,5 @@
 const Dancer = () => { 
-  let dancer = {}; 
+  let dancer = Object.assign({}, _draw(), _poseNet()); 
   dancer.id = null; 
   dancer.pose = null; 
   dancer.color = [100]; 
