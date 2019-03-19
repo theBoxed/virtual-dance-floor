@@ -25,7 +25,7 @@ function setup() {
 function draw() {
   background(0);
   updateDancer(dancer); 
-  // updateParticipants(participants); 
+  updateParticipants(participants); 
 }
 
 window.addEventListener('beforeunload', function(e) {

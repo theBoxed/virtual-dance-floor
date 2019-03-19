@@ -5,19 +5,19 @@ const Participant = () => {
 
   participant.update = () => {
     _findPosition();
-    let pose = participant.pose; 
-    participant.drawPose(pose); 
+    let pose = this.pose; 
+    this.drawPose(pose); 
   }
 
   const _findPosition = () => { 
     firebase
     .database()
-    .ref(`users/${_id}`)
+    .ref(`users/${participant.id}`)
     .once('value')
     .then(snapshot => {
       participant.pose = snapshot.val().pose;
     });  
   }
 
-  return { participant }
+  return participant; 
 }
