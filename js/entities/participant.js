@@ -10,12 +10,12 @@ const Participant = () => {
 
   const _findPosition = () => { 
     firebase
-    .database()
-    .ref(`users/${participant.id}`)
-    .once('value')
-    .then(snapshot => {
-      participant.pose = snapshot.val().pose;
-    });  
+      .database()
+      .ref(`users/${participant.id}`)
+      .once('value')
+      .then(snapshot => {
+        participant.pose = snapshot.val().pose;
+      });  
   }
 
   return participant; 

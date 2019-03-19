@@ -32,7 +32,6 @@ function initializeParticipants(){
 function updateParticipants(participants){ 
   if (!participants || participants.length === 0) return; 
   for(let i = 0; i < participants.length; i++){
-    console.log('hello'); 
     if(participants[i].getUserId !== null) {
       participants[i].update();
     }
