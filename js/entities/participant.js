@@ -1,8 +1,7 @@
 const Participant = () => {
-  const participant = Object.assign({}, _draw()); 
-  participant.id = null;
-  participant.pose = null; 
-  participant.color = [100]; 
+  //initialize participant and give it extra powers
+  const participant = Object.assign(
+    { id: null, pose: null, color: [100]}, _draw()); 
 
   participant.update = () => {
     _findPosition();

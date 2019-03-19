@@ -18,7 +18,7 @@ function setup() {
   dancer.initialize(scene.getPoseNet()); 
 
   //sets up participants
-  // participants = initializeParticipants(); 
+  participants = initializeParticipants(); 
 }
 
 //Clears canvas, and re-draws dancer and participants

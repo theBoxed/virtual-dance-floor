@@ -1,5 +1,5 @@
 const Dancer = () => { 
-
+  //initializes dancer object and gives it extra powers
   let dancer = Object.assign(
     { id: null, pose: null, color: [100], done: false, 
       isReady: false, posenetObjs: {} 
