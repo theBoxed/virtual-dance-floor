@@ -11,11 +11,14 @@ const Dancer = () => {
     //write pose to firebase
     firebase.database().ref(`users/${this.id}`)
       .set({pose : this.pose});
+      
+    dancer.drawPose(this.pose)
   }
 
   dancer.initialize = poseNet => { 
     //set up random userid
-    dancer.id = Math.floor(Math.random() * 40000); 
+    this.id = Math.floor(Math.random() * 40000); 
+
 
     //contiously find new pose
     poseNet.on('pose', results => { 
