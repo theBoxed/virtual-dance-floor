@@ -5,6 +5,7 @@ const Dancer = () => {
   dancer.color = [100]; 
   dancer.done = false; 
   dancer.isReady = false; 
+  dancer.posenetObjs = {}; 
 
   dancer.update = () => { 
     //write pose to firebase
@@ -20,6 +21,7 @@ const Dancer = () => {
     poseNet.on('pose', results => { 
       dancer.pose = results; 
       dancer.isReady = true; 
+      dancer.updatePose(results); 
     });  
   }
 

@@ -1,8 +1,7 @@
 function updateDancer(currDancer){ 
   if (currDancer.isReady && currDancer.pose.length > 0){ 
     currDancer.update(); 
-    let pose = currDancer.poseNet.updatePose(currDancer.pose); 
-    currDancer.draw.drawPose(pose); 
+    // currDancer.drawPose(pose); 
   }
 }
 

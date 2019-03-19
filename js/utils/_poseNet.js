@@ -1,13 +1,13 @@
 const _poseNet = () => { 
   
   const updatePose = (results) => {
-    posenetObjs = results;
+    this.posenetObjs = results;
     if (results.length > 0) {
       let newPose = _convertPose(_getLargestPosenetObj(results));
-      if (pose == null) {
-        pose = newPose
+      if (this.pose == null) {
+        this.pose = newPose
       } else {
-        _lerpPose(pose, newPose, 0.3);
+        _lerpPose(this.pose, newPose, 0.3);
       }
     }
   }
