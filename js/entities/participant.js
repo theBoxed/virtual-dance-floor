@@ -5,8 +5,7 @@ const Participant = () => {
 
   participant.update = () => {
     _findPosition();
-    let pose = this.pose; 
-    this.drawPose(pose); 
+    participant.drawPose(participant.pose); 
   }
 
   const _findPosition = () => { 
