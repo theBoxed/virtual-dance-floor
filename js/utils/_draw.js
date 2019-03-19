@@ -1,10 +1,9 @@
 const _draw = () => { 
-  _estimateSize = (pose) => {
+  const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
 
-  _drawBones = arguments => {
-    console.log('arguments', arguments)
+  const _drawBones = arguments => {
     beginShape()
     for (let i = 0; i < arguments.length; i++) {
       vertex(arguments[i].x, arguments[i].y);
@@ -12,7 +11,7 @@ const _draw = () => {
     endShape()
   }
 
-  _drawHead = (pose) => {
+  const _drawHead = (pose) => {
     let ang = atan2(pose.leftEar.y - pose.rightEar.y, pose.leftEar.x - pose.rightEar.x);
     let r = dist(pose.leftEar.x, pose.leftEar.y, pose.rightEar.x, pose.rightEar.y);
     arc((pose.leftEar.x + pose.rightEar.x) / 2, (pose.leftEar.y + pose.rightEar.y) / 2, r, r, ang, ang + PI);
@@ -22,7 +21,7 @@ const _draw = () => {
     fill(255);
   }
 
-  _drawFace = (pose) => {
+  const _drawFace = (pose) => {
     let s = _estimateSize(pose); 
     fill(255);
     ellipse(pose.leftEye.x, pose.leftEye.y, s * 0.8, s * 0.8);
@@ -31,7 +30,7 @@ const _draw = () => {
     pop();
   }
 
-  drawPose = (pose, args) => {
+  const drawPose = (pose, args) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
