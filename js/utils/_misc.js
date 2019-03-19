@@ -1,3 +1,4 @@
+
 function initializeParticipants(){ 
   firebase
   .database()
@@ -14,18 +15,4 @@ function initializeParticipants(){
     }
     return participants;
   })
-}
-
-function updateDancer(dancer){ 
-  dancer.update();
-  dancer.draw._drawPose(dancer.pose, {color: [100]})
-}
-
-function updateParticipants(participants){ 
-  for(let i = 0; i < participants.length; i++){
-    if(participants[i].getUserId !== null) {
-      participants[i].update();
-      participants[i].draw._drawPose(participants[i].pose, {color: [100]})
-    }
-  }
 }

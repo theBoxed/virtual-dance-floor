@@ -7,12 +7,11 @@ const Dancer = () => {
   dancer.loaded = false; 
   //when user has left tab or browser
   dancer.done = false; 
-  
+  dancer.isReady = (this.loaded && !this.done); 
+
   dancer.update = () => { 
-    if (this.loaded && !this.done) {
-      //write pose to firebase
-      firebase.database().ref(`users/${_id}`).set({pose});
-    }
+    //write pose to firebase
+    firebase.database().ref(`users/${_id}`).set({pose});
   }
   
   dancer.initialize = poseNet => { 

@@ -18,14 +18,14 @@ function setup() {
   dancer.initialize(scene.getPoseNet());
 
   //sets up participants
-  participants = initializeParticipants(); 
+  // participants = initializeParticipants(); 
 }
 
 //Clears canvas, and re-draws dancer and participants
 function draw() {
   background(0);
   updateDancer(dancer); 
-  updateParticipants(participants)
+  // updateParticipants(participants); 
 }
 
 window.addEventListener('beforeunload', function(e) {
