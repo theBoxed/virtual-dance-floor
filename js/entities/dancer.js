@@ -7,7 +7,7 @@ const Dancer = () => {
   dancer.loaded = false; 
   //when user has left tab or browser
   dancer.done = false; 
-
+  
   dancer.update = () => { 
     if (this.loaded && !this.done) {
       //write pose to firebase
@@ -21,6 +21,7 @@ const Dancer = () => {
     //contiously find new pose
     poseNet.on('pose', results => { 
       this.loaded = true; 
+      _updatePose(results); 
     });  
   }
 
@@ -29,4 +30,5 @@ const Dancer = () => {
   }
 
   return Object.assign( dancer, _draw(), _poseNet()); 
+
 }
