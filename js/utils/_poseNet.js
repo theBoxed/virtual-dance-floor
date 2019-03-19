@@ -1,7 +1,6 @@
 const _poseNet = () => { 
-  const poseNet = {}; 
   
-  poseNet._updatePose = (results) => {
+  const updatePose = (results) => {
     posenetObjs = results;
     if (results.length > 0) {
       let newPose = _convertPose(_getLargestPosenetObj(results));
@@ -55,5 +54,5 @@ const _poseNet = () => {
     }
     return objs[max_i];
   }
-  return { poseNet }
+  return { updatePose }
 }

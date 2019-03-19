@@ -1,3 +1,10 @@
+function updateDancer(currDancer){ 
+  if (currDancer.isReady && currDancer.pose.length > 0){ 
+    currDancer.update(); 
+    let pose = currDancer.poseNet.updatePose(currDancer.pose); 
+    currDancer.draw.drawPose(pose); 
+  }
+}
 
 function initializeParticipants(){ 
   firebase
@@ -6,7 +13,7 @@ function initializeParticipants(){
   .once('value')
   .then((world)=> {
     for(let user in world.val()){ 
-      if(user !== dancer.id) {
+      if(user !== dancer.id)   {
         let currParticipant = Object.assign(Participant(), _draw());
         currParticipant.pose = world.val()[user].pose; 
         currParticipant.id = user; 

@@ -14,8 +14,8 @@ function setup() {
   scene.start();
 
   //sets up dancer
-  let dancer = Dancer(); 
-  dancer.initialize(scene.getPoseNet());
+  dancer = Dancer(); 
+  dancer.initialize(scene.getPoseNet()); 
 
   //sets up participants
   // participants = initializeParticipants(); 

@@ -1,11 +1,13 @@
 const Participant = () => {
-  const participant = {}; 
+  const participant = Object.assign({}, _draw()); 
   participant.id = null;
   participant.pose = null; 
   participant.color = [100]; 
 
   participant.update = () => {
-    _findPosition()
+    _findPosition();
+    let pose = participant.pose; 
+    participant.drawPose(pose); 
   }
 
   const _findPosition = () => { 
@@ -14,9 +16,9 @@ const Participant = () => {
     .ref(`users/${_id}`)
     .once('value')
     .then(snapshot => {
-      _pose = snapshot.val().pose;
+      participant.pose = snapshot.val().pose;
     });  
   }
 
-  return Object.assign( participant, _draw()); 
+  return { participant }
 }

@@ -1,10 +1,10 @@
 const _draw = () => { 
-  const draw = {}; 
   _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
 
   _drawBones = arguments => {
+    console.log('arguments', arguments)
     beginShape()
     for (let i = 0; i < arguments.length; i++) {
       vertex(arguments[i].x, arguments[i].y);
@@ -31,11 +31,11 @@ const _draw = () => {
     pop();
   }
 
-  draw._drawPose = (pose, args) => {
+  drawPose = (pose, args) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
-    push();
+    push(); 
     colorMode(HSB, 255);
     stroke.apply(this, args.color);
     strokeWeight(4);
@@ -52,5 +52,5 @@ const _draw = () => {
     _drawFace(pose);
   }
 
-  return { draw }
+  return { drawPose }; 
 }
