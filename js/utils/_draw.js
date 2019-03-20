@@ -56,10 +56,10 @@ const _draw = () => {
 
   const _drawButtons = (buttons) => { 
     if (buttons) { 
-      buttons[0].size(40, 20); 
-      buttons[0].position(pose.leftEar.x, pose.leftEar.y + verticalOffset); 
-      buttons[1].size(40, 20); 
-      buttons[1].position(pose.leftEar.x + 50, pose.leftEar.y + verticalOffset); 
+      for (let i = 0; i < buttons.length; i++){ 
+        buttons[i].size(40, 20); 
+        buttons[i].position(pose.leftEar.x + (i * 50), pose.leftEar.y + verticalOffset); 
+      }
     }
   }
 
