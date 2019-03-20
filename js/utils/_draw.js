@@ -63,12 +63,12 @@ const _draw = () => {
       for (let i = 0; i < buttons.length; i++){ 
         buttons[i].size(40, 20); 
         buttons[i].position(pose.leftEar.x + (i * 50), pose.leftEar.y + verticalOffset); 
-        buttons[i].mousePressed(_offset); 
+        buttons[i].mousePressed(_setOffset); 
       }
     }
   }
 
-  const _offset = () => { 
+  const _setOffset = () => { 
     offset += 10; 
   }
 
