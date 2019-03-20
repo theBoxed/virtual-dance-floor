@@ -1,4 +1,5 @@
 const _draw = () => { 
+  let verticalOffset = 0; 
   const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
@@ -40,6 +41,12 @@ const _draw = () => {
     strokeWeight(4);
     strokeJoin(ROUND);
     fill(255);
+    
+    let leftButton = createButton('left'); 
+    let rightButton = createButton('right'); 
+
+    leftButton.size(20, 20); 
+    leftButton.position(pose.leftEar.x, pose.leftEar + verticalOffset)
 
     _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
     _drawBones([pose.leftShoulder, pose.leftElbow, pose.leftWrist]);
