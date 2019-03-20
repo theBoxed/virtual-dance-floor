@@ -31,7 +31,7 @@ const _draw = () => {
     pop();
   }
 
-  const drawPose = (pose, leftButton, rightButton, args ) => {
+  const drawPose = (pose, buttons, args ) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
@@ -42,11 +42,11 @@ const _draw = () => {
     strokeJoin(ROUND);
     fill(255);
     
-    if (leftButton) { 
-      leftButton.size(40, 20); 
-      leftButton.position(pose.leftEar.x, pose.leftEar.y + verticalOffset); 
-      rightButton.size(40, 20); 
-      rightButton.position(pose.leftEar.x + 50, pose.leftEar.y + verticalOffset); 
+    if (buttons) { 
+      buttons[0].size(40, 20); 
+      buttons[0].position(pose.leftEar.x, pose.leftEar.y + verticalOffset); 
+      buttons[1].size(40, 20); 
+      buttons[1].position(pose.leftEar.x + 50, pose.leftEar.y + verticalOffset); 
     }
 
     _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
