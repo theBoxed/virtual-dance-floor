@@ -42,12 +42,7 @@ const _draw = () => {
     strokeJoin(ROUND);
     fill(255);
     
-    if (buttons) { 
-      buttons[0].size(40, 20); 
-      buttons[0].position(pose.leftEar.x, pose.leftEar.y + verticalOffset); 
-      buttons[1].size(40, 20); 
-      buttons[1].position(pose.leftEar.x + 50, pose.leftEar.y + verticalOffset); 
-    }
+    _drawButtons(buttons); 
 
     _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
     _drawBones([pose.leftShoulder, pose.leftElbow, pose.leftWrist]);
@@ -57,6 +52,15 @@ const _draw = () => {
 
     _drawHead(pose);
     _drawFace(pose);
+  }
+
+  const _drawButtons = (buttons) => { 
+    if (buttons) { 
+      buttons[0].size(40, 20); 
+      buttons[0].position(pose.leftEar.x, pose.leftEar.y + verticalOffset); 
+      buttons[1].size(40, 20); 
+      buttons[1].position(pose.leftEar.x + 50, pose.leftEar.y + verticalOffset); 
+    }
   }
 
   return { drawPose }; 
