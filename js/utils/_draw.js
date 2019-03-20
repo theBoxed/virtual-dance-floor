@@ -1,5 +1,7 @@
 const _draw = () => { 
   let verticalOffset = -100; 
+  let offset = 0; 
+
   const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
@@ -35,6 +37,10 @@ const _draw = () => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
+    for (let prop in pose){ 
+      pose[prop].x += offset; 
+    }
+
     push(); 
     colorMode(HSB, 255);
     stroke.apply(this, args.color);
@@ -59,8 +65,14 @@ const _draw = () => {
       for (let i = 0; i < buttons.length; i++){ 
         buttons[i].size(40, 20); 
         buttons[i].position(pose.leftEar.x + (i * 50), pose.leftEar.y + verticalOffset); 
+        buttons[i].mousePressed(_offset); 
       }
     }
+  }
+
+  const _offset = () => { 
+    console.log('offset has been')
+    offset += 10; 
   }
 
   return { drawPose }; 
