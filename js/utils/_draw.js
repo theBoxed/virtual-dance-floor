@@ -71,7 +71,6 @@ const _draw = () => {
   }
 
   const _offset = () => { 
-    console.log('offset has been')
     offset += 10; 
   }
 
