@@ -37,9 +37,7 @@ const _draw = () => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
-    for (let prop in pose){ 
-      pose[prop].x += offset; 
-    }
+    pose = _offsetPose(pose); 
 
     push(); 
     colorMode(HSB, 255);
@@ -74,5 +72,12 @@ const _draw = () => {
     offset += 10; 
   }
 
+  const _offsetPose = (pose) => { 
+    for (let prop in pose){ 
+      pose[prop].x += offset; 
+    }
+    return pose; 
+  }
+ 
   return { drawPose }; 
 }
