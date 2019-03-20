@@ -1,20 +1,22 @@
 const Dancer = () => { 
+  let leftButton 
   //initializes dancer object and gives it extra powers
   let dancer = Object.assign(
-    { id: null, pose: null, color: [100], done: false, 
-      isReady: false, posenetObjs: {} 
-    }, _draw(), _poseNet()); 
+    { id: null, pose: null, color: [100], done: false, isReady: false, posenetObjs: {}, 
+    rightButton : createButton('right')}, 
+      _draw(), _poseNet()); 
 
   dancer.update = () => { 
     //write pose to firebase
     firebase.database().ref(`users/${this.id}`)
       .set({pose : this.pose});
-
+    
     //draw pose
-    dancer.drawPose(this.pose)
+    dancer.drawPose(this.pose, leftButton)
   }
 
   dancer.initialize = poseNet => { 
+    leftButton = createButton('left'); 
     //set up random userid
     this.id = Math.floor(Math.random() * 40000); 
     
