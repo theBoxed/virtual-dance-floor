@@ -1,5 +1,5 @@
 const Dancer = () => { 
-  let leftButton 
+  let leftButton, rightButton; 
   //initializes dancer object and gives it extra powers
   let dancer = Object.assign(
     { id: null, pose: null, color: [100], done: false, isReady: false, posenetObjs: {}, 
@@ -12,11 +12,12 @@ const Dancer = () => {
       .set({pose : this.pose});
     
     //draw pose
-    dancer.drawPose(this.pose, leftButton)
+    dancer.drawPose(this.pose, leftButton, rightButton); 
   }
 
   dancer.initialize = poseNet => { 
     leftButton = createButton('left'); 
+    rightButton = createButton('right'); 
     //set up random userid
     this.id = Math.floor(Math.random() * 40000); 
     

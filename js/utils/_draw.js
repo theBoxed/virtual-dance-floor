@@ -1,5 +1,5 @@
 const _draw = () => { 
-  let verticalOffset = 0; 
+  let verticalOffset = -100; 
   const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
@@ -31,7 +31,7 @@ const _draw = () => {
     pop();
   }
 
-  const drawPose = (pose, leftButton, args ) => {
+  const drawPose = (pose, leftButton, rightButton, args ) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
 
@@ -43,8 +43,10 @@ const _draw = () => {
     fill(255);
     
     if (leftButton) { 
-      leftButton.size(20, 20); 
-      leftButton.position(pose.leftEar.x, pose.leftEar + verticalOffset)
+      leftButton.size(40, 20); 
+      leftButton.position(pose.leftEar.x, pose.leftEar.y + verticalOffset); 
+      rightButton.size(40, 20); 
+      rightButton.position(pose.leftEar.x + 50, pose.leftEar.y + verticalOffset); 
     }
 
     _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
