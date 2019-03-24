@@ -11,9 +11,12 @@ const manageUsers = () => {
       .ref('users')
       .once('value')
       .then(snapshot => {
-        const numUsers = Object.keys(snapshot.val()).length; 
-        if ((numUsers - 1) !== participants){ 
-          alert("the number of user's have changed"); 
+        const numFBParticipants = (Object.keys(snapshot.val()).length -1); 
+        console.log('num firebase-participants:', numFBParticipants, 'num local-participants:', participants.length); 
+        
+        if ((numFBParticipants) !== participants.length){ 
+          // alert("the number of user's have changed"); 
+          console.log("the number of user's has changed"); 
           _numUsersHasChanged(snapshot.val()); 
         }
       });  
