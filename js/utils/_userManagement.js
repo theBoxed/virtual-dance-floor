@@ -13,7 +13,7 @@ const manageUsers = () => {
       .then(snapshot => {
         const numUsers = Object.keys(snapshot.val()).length; 
         if ((numUsers - 1) !== participants){ 
-          console.log('users have changed'); 
+          alert("the number of user's have changed"); 
           _numUsersHasChanged(snapshot.val()); 
         }
       });  
