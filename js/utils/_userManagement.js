@@ -11,26 +11,33 @@ const manageUsers = () => {
       .ref('users')
       .once('value')
       .then(snapshot => {
-        if (user.length !== participants){ 
+        const numUsers = Object.keys(snapshot.val()).length; 
+        if ((numUsers - 1) !== participants){ 
+          console.log('users have changed'); 
           _numUsersHasChanged(snapshot.val()); 
         }
       });  
   }
 
   const _numUsersHasChanged = (users) => { 
-    //go through participants 
-    //go through keys in snap shot
     //if a key is in snapshot but not participants
-    _addUser(); 
+    if (users.length > participants){ 
+      _addUser(); 
+    }
+
     //if a key is in participants but not snapshot
-    _removeUser(); 
+    else if (users.length < participants){ 
+      _removeUser(); 
+    }
   }
 
   const _addUser = () => { 
+    console.log('adding user'); 
     //add user to array of participants
   }
 
   const _removeUser = () => { 
+    console.log('removing users'); 
     //remove user from array of participants
   }
 
