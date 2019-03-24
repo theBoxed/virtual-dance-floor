@@ -1,4 +1,7 @@
 const _draw = () => { 
+  let verticalOffset = -100; 
+  let offset = 0; 
+
   const _estimateSize = (pose) => {
     return dist(pose.nose.x, pose.nose.y, pose.leftEye.x, pose.leftEye.y);
   }
@@ -30,9 +33,11 @@ const _draw = () => {
     pop();
   }
 
-  const drawPose = (pose, args) => {
+  const drawPose = (pose, buttons, args ) => {
     if (args == undefined) { args = {} }
     if (args.color == undefined) { args.color = [255, 255, 255] }
+
+    pose = _offsetPose(pose); 
 
     push(); 
     colorMode(HSB, 255);
@@ -40,6 +45,8 @@ const _draw = () => {
     strokeWeight(4);
     strokeJoin(ROUND);
     fill(255);
+    
+    _drawButtons(buttons); 
 
     _drawBones([pose.leftShoulder, pose.rightShoulder, pose.rightHip, pose.leftHip, pose.leftShoulder]);
     _drawBones([pose.leftShoulder, pose.leftElbow, pose.leftWrist]);
@@ -51,5 +58,26 @@ const _draw = () => {
     _drawFace(pose);
   }
 
+  const _drawButtons = (buttons) => { 
+    if (buttons) { 
+      for (let i = 0; i < buttons.length; i++){ 
+        buttons[i].size(40, 20); 
+        buttons[i].position(pose.leftEar.x + (i * 50), pose.leftEar.y + verticalOffset); 
+        buttons[i].mousePressed(_setOffset); 
+      }
+    }
+  }
+
+  const _setOffset = () => { 
+    offset += 10; 
+  }
+
+  const _offsetPose = (pose) => { 
+    for (let prop in pose){ 
+      pose[prop].x += offset; 
+    }
+    return pose; 
+  }
+ 
   return { drawPose }; 
 }
