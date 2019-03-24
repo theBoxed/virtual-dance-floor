@@ -27,10 +27,8 @@ function draw() {
   updateDancer(dancer); 
   //updates partcipants position
   updateParticipants(participants);
-  //checks if there are new users or if users have left
-  //and update the list 
+  //checks if there are new users or if users have left & update the list 
   manageUsers().checkForUpdates(); 
-
 }
 
 window.addEventListener('beforeunload', function(e) {
