@@ -11,25 +11,34 @@ const manageUsers = () => {
       .ref('users')
       .once('value')
       .then(snapshot => {
+        //number of firebase participants
         const numFBParticipants = (Object.keys(snapshot.val()).length -1); 
-        console.log('num firebase-participants:', numFBParticipants, 'num local-participants:', participants.length); 
-        
-        if ((numFBParticipants) !== participants.length){ 
-          // alert("the number of user's have changed"); 
-          console.log("the number of user's has changed"); 
-          _numUsersHasChanged(snapshot.val()); 
-        }
+        _printNumParticipants(numFBParticipants); 
+        _areParticipantsLengthEqual(numFBParticipants, participants.length); 
       });  
   }
 
-  const _numUsersHasChanged = (users) => { 
+  const _printNumParticipants = (FBParticipants) => { 
+    console.log('num firebase-participants:', FBParticipants, 
+      'num local-participants:', participants.length); 
+  }
+
+  const _areParticipantsLengthEqual = (fbPrtcpntsLength, locPrtcpntsLength) => { 
+    if (fbPrtcpntsLength !== locPrtcpntsLength){ 
+      // alert("the number of user's have changed"); 
+      console.log("the number of user's has changed"); 
+      _numUsersHasChanged(fbPrtcpntsLength, locPrtcpntsLength); 
+    }
+  }
+
+  const _numUsersHasChanged = (fbPrtcpntsLength, locPrtcpntsLength) => { 
     //if a key is in snapshot but not participants
-    if (users.length > participants){ 
+    if (fbPrtcpntsLength > locPrtcpntsLength){ 
       _addUser(); 
     }
 
     //if a key is in participants but not snapshot
-    else if (users.length < participants){ 
+    else if (fbPrtcpntsLength < locPrtcpntsLength){ 
       _removeUser(); 
     }
   }
@@ -38,7 +47,7 @@ const manageUsers = () => {
     console.log('adding user'); 
     //add user to array of participants
   }
-
+  
   const _removeUser = () => { 
     console.log('removing users'); 
     //remove user from array of participants
