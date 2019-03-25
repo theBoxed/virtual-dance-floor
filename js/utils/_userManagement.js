@@ -41,8 +41,15 @@ const manageUsers = () => {
     if (fbPrtcpntsLength > locPrtcpntsLength){ 
       for (let i = 0; i < fbParticipants.length; i++){ 
         console.log('fbParticipants', fbParticipantsKeys[i], 'participants', participants[i]); 
+        if (fbParticipantsKeys[i] !== participants[i]){ 
+          let newPartcipant = Participant(); 
+          newPartcipant.id = fbParticipantsKeys[i]; 
+          newPartcipant.pose = world.val()[user].pose; 
+          participants.push(newPartcipant); 
+          return; 
+        }
       }
-      _addUser(fbParticipants); 
+ 
     }
 
     //if a key is in participants but not snapshot
