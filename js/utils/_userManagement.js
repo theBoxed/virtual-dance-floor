@@ -1,4 +1,5 @@
 const manageUsers = () => { 
+  const currUsers = {}; 
   const checkForUpdates = () => { 
     let timeToInvoke = 3000; 
     //reads users from fire base every x milliseconds
@@ -14,7 +15,7 @@ const manageUsers = () => {
         //number of firebase participants
         const numFBParticipants = (Object.keys(snapshot.val()).length -1); 
         _printNumParticipants(numFBParticipants); 
-        _areParticipantsLengthEqual(numFBParticipants, participants.length); 
+        _areParticipantsLengthEqual(numFBParticipants, participants.length, snapshot.val()); 
       });  
   }
 
@@ -23,23 +24,29 @@ const manageUsers = () => {
       'num local-participants:', participants.length); 
   }
 
-  const _areParticipantsLengthEqual = (fbPrtcpntsLength, locPrtcpntsLength) => { 
+  const _areParticipantsLengthEqual = (fbPrtcpntsLength, locPrtcpntsLength, fbParticipants) => { 
     if (fbPrtcpntsLength !== locPrtcpntsLength){ 
       // alert("the number of user's have changed"); 
       console.log("the number of user's has changed"); 
-      _numUsersHasChanged(fbPrtcpntsLength, locPrtcpntsLength); 
+      _numUsersHasChanged(fbPrtcpntsLength, locPrtcpntsLength, fbParticipants); 
     }
   }
 
-  const _numUsersHasChanged = (fbPrtcpntsLength, locPrtcpntsLength) => { 
+  const _numUsersHasChanged = (fbPrtcpntsLength, locPrtcpntsLength, fbParticipants) => { 
     //if a key is in snapshot but not participants
     if (fbPrtcpntsLength > locPrtcpntsLength){ 
-      _addUser(); 
+      _addUser(fbParticipants); 
     }
 
     //if a key is in participants but not snapshot
     else if (fbPrtcpntsLength < locPrtcpntsLength){ 
-      _removeUser(); 
+      _removeUser(fbParticipants); 
+    }
+  }
+
+  const _loopThroughUsers = () => { 
+    for (let prop in users) { 
+
     }
   }
 
