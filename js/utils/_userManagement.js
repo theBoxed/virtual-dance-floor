@@ -1,9 +1,12 @@
 const manageUsers = () => { 
   const currUsers = {}; 
   const checkForUpdates = () => { 
-    let timeToInvoke = 3000; 
-    //reads users from fire base every x milliseconds
-    const intervalVar  = setInterval(_checkUserList, timeToInvoke);     
+    if (dancer.isReady){ 
+      let timeToInvoke = 3000; 
+      //reads users from fire base every x milliseconds
+      
+      const intervalVar  = setInterval(_checkUserList, timeToInvoke);  
+    }   
   }
 
   const _checkUserList = () => { 
@@ -34,7 +37,11 @@ const manageUsers = () => {
 
   const _numUsersHasChanged = (fbPrtcpntsLength, locPrtcpntsLength, fbParticipants) => { 
     //if a key is in snapshot but not participants
+    const fbParticipantsKeys = Object.keys(fbParticipants); 
     if (fbPrtcpntsLength > locPrtcpntsLength){ 
+      for (let i = 0; i < fbParticipants.length; i++){ 
+        console.log('fbParticipants', fbParticipantsKeys[i], 'participants', participants[i]); 
+      }
       _addUser(fbParticipants); 
     }
 
