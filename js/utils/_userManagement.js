@@ -5,7 +5,7 @@ const manageUsers = () => {
       let timeToInvoke = 3000; 
       //reads users from fire base every x milliseconds
       
-      const intervalVar  = setInterval(_checkUserList, timeToInvoke);  
+      setInterval(_checkUserList, timeToInvoke);  
     }   
   }
 
