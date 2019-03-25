@@ -51,12 +51,6 @@ const manageUsers = () => {
     }
   }
 
-  const _loopThroughUsers = () => { 
-    for (let prop in users) { 
-
-    }
-  }
-
   const _addUser = () => { 
     console.log('adding user'); 
     //add user to array of participants
