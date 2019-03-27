@@ -39,7 +39,7 @@ const manageUsers = () => {
     //if a key is in snapshot but not participants
     const fbParticipantsKeys = Object.keys(fbParticipants); 
     if (fbPrtcpntsLength > locPrtcpntsLength){ 
-      for (let i = 0; i < fbParticipants.length; i++){ 
+      for (let i = 0; i < fbPrtcpntsLength; i++){ 
         console.log('fbParticipants', fbParticipantsKeys[i], 'participants', participants[i]); 
         if (fbParticipantsKeys[i] !== participants[i]){ 
           let newPartcipant = Participant(); 
@@ -49,23 +49,18 @@ const manageUsers = () => {
           return; 
         }
       }
- 
     }
 
     //if a key is in participants but not snapshot
     else if (fbPrtcpntsLength < locPrtcpntsLength){ 
-      _removeUser(fbParticipants); 
+      for (let i = 0; i < locPrtcpntsLength; i++){ 
+        if (fbParticipantsKeys[i] !== participants[i]){ 
+          console.log('removing'); 
+          participants.splice(i, 1); 
+          return; 
+        }
+      }
     }
-  }
-
-  const _addUser = () => { 
-    console.log('adding user'); 
-    //add user to array of participants
-  }
-  
-  const _removeUser = () => { 
-    console.log('removing users'); 
-    //remove user from array of participants
   }
 
   return { checkForUpdates }
