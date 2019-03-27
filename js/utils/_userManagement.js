@@ -17,7 +17,7 @@ const manageUsers = () => {
       .then(snapshot => {
         //number of firebase participants
         const numFBParticipants = (Object.keys(snapshot.val()).length -1); 
-        _printNumParticipants(numFBParticipants); 
+        // _printNumParticipants(numFBParticipants); 
         _areParticipantsLengthEqual(numFBParticipants, participants.length, snapshot.val()); 
       });  
   }
@@ -40,11 +40,13 @@ const manageUsers = () => {
     const fbParticipantsKeys = Object.keys(fbParticipants); 
     if (fbPrtcpntsLength > locPrtcpntsLength){ 
       for (let i = 0; i < fbPrtcpntsLength; i++){ 
+        console.log('a user has been added')
         console.log('fbParticipants', fbParticipantsKeys[i], 'participants', participants[i]); 
         if (fbParticipantsKeys[i] !== participants[i]){ 
           let newPartcipant = Participant(); 
           newPartcipant.id = fbParticipantsKeys[i]; 
           newPartcipant.pose = world.val()[user].pose; 
+          console.log('newParticipant', newPartcipant);
           participants.push(newPartcipant); 
           return; 
         }
