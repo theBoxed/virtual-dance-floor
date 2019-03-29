@@ -1,0 +1,22 @@
+{
+  "name": "virtual-dance-floor",
+  "version": "1.0.0",
+  "description": "## Participants All other dancers that are not yourself **WHAT'S DIFFERENT FROM Dancer** Loaded or done When writing to firebase we are writing to an array of joints TODO: When we receive data from FB we reset the joints array TODO: Data from firebase is an array of joints that we loop through in the _drawPose Participants don't need posenet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theBoxed/virtual-dance-floor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theBoxed/virtual-dance-floor/issues"
+  },
+  "homepage": "https://github.com/theBoxed/virtual-dance-floor#readme",
+  "devDependencies": {
+    "eslint": "^5.15.3"
+  }
+}
