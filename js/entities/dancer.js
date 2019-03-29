@@ -17,6 +17,7 @@ const Dancer = () => {
   dancer.initialize = poseNet => { 
     // buttons[0] = createButton('left'); 
     buttons[0] = createButton('right'); 
+    buttons[0].hide(); 
 
     //set up random userid
     this.id = Math.floor(Math.random() * 40000); 

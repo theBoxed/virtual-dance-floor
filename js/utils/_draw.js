@@ -59,8 +59,9 @@ const _draw = () => {
   }
 
   const _drawButtons = (buttons) => { 
-    if (buttons) { 
+    if (buttons && pose) { 
       for (let i = 0; i < buttons.length; i++){ 
+        buttons[i].show(); 
         buttons[i].size(40, 20); 
         buttons[i].position(pose.leftEar.x + (i * 50), pose.leftEar.y + verticalOffset); 
         buttons[i].mousePressed(_setOffset); 

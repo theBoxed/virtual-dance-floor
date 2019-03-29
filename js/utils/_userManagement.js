@@ -28,8 +28,7 @@ const manageUsers = () => {
   }
 
   const _areParticipantsLengthEqual = (fbPrtcpntsLength, locPrtcpntsLength, fbParticipants) => { 
-    if (fbPrtcpntsLength !== locPrtcpntsLength){ 
-      // alert("the number of user's have changed"); 
+    if (fbPrtcpntsLength !== locPrtcpntsLength) { 
       console.log("the number of user's has changed"); 
       _numUsersHasChanged(fbPrtcpntsLength, locPrtcpntsLength, fbParticipants); 
     }
@@ -40,12 +39,14 @@ const manageUsers = () => {
     const fbParticipantsKeys = Object.keys(fbParticipants); 
     if (fbPrtcpntsLength > locPrtcpntsLength){ 
       for (let i = 0; i < fbPrtcpntsLength; i++){ 
-        console.log('a user has been added')
-        console.log('fbParticipants', fbParticipantsKeys[i], 'participants', participants[i]); 
+        console.log('a user has been added'); 
+        console.log('participants', participants); 
+        console.log('fbParticipants', fbParticipantsKeys[i], 'participants', participants,  participants[i]); 
         if (fbParticipantsKeys[i] !== participants[i]){ 
           let newPartcipant = Participant(); 
           newPartcipant.id = fbParticipantsKeys[i]; 
-          newPartcipant.pose = world.val()[user].pose; 
+          newPartcipant.pose = firebase.database().ref(`users/${this.id}`); 
+          console.log('new participant', newPartcipant.pose); 
           console.log('newParticipant', newPartcipant);
           participants.push(newPartcipant); 
           return; 
